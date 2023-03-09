@@ -1,0 +1,33 @@
+{
+    "name": "zealov/zealov",
+    "description": "zealov",
+    "type": "library",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "liusq",
+            "email": "921491025@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Zealov\\": "src",
+            "Chumper\\Zipper\\": "src/Misc/Zipper"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zealov\\ZealovServiceProvider"
+            ]
+        }
+    }
+}
