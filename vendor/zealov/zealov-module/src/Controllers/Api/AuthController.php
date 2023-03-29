@@ -10,6 +10,8 @@
 namespace Zealov\Controllers\Api;
 
 use Illuminate\Routing\Controller;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Zealov\Kernel\Response\ApiCode;
 use Zealov\Kernel\Utils\Menu;
 
 class AuthController extends Controller
@@ -26,11 +28,10 @@ class AuthController extends Controller
         $userInfo['accessedRoutes'] = require __DIR__ . '/../../Config/AdminMenu.php';
         //获取模块下的菜单
         $userInfo['accessedRoutes'] = array_merge($userInfo['accessedRoutes'], Menu::getMenuList());
-        return response()->json([
-            "success" => true,
-            "code"    => 200,
-            "data"    => $userInfo
-        ]);
+        return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+            ->withHttpCode(ApiCode::HTTP_OK)
+            ->withData($userInfo)
+            ->build();
     }
 
 
