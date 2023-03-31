@@ -11,7 +11,8 @@
         "kayex/http-codes": "^1.1",
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
-        "marcin-orlowski/laravel-api-response-builder": "^9.3"
+        "marcin-orlowski/laravel-api-response-builder": "^9.3",
+        "mews/captcha": "^3.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

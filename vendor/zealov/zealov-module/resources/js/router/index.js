@@ -37,11 +37,7 @@ sync(store, router)
 
 export default router
 
-/**
- * Create a new router instance.
- *
- * @return {Router}
- */
+
 function createRouter () {
     const router = new Router({
         scrollBehavior,
@@ -58,7 +54,9 @@ function createRouter () {
 let isToken = true
 async function beforeEach (to, from, next) {
     if(isToken){
-        const { roles_data,accessedRoutes } = await store.dispatch('user/getInfo')
+        console.log(1223)
+        const { accessedRoutes } = await store.dispatch('user/getInfo')
+        console.log(accessedRoutes)
         //获取当前访问路由的标签
         const label = getLabelRoute(to.path,accessedRoutes)
         console.log(label)

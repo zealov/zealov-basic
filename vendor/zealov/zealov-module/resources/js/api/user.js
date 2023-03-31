@@ -85,3 +85,10 @@ export function update(data) {
     data
   })
 }
+export function captcha (data) {
+    return request({
+        url: '/captcha',
+        method: 'post',
+        data
+    })
+}

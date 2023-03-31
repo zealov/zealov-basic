@@ -2,6 +2,41 @@
 return [
     [
         "label"     => "sys",
+        "path"      => "/admin/login",
+        "component" => "default",
+        "name"      => "login",
+        "meta"      => [
+            "title" => "登录",
+            "icon"  => "el-icon-files",
+            "roles" => [
+                1
+            ],
+        ],
+        "children"  => [
+            [
+                "label"     => "sys",
+                "path"      => "/admin/login",
+                "component" => "login",
+                "name"      => "admin.login",
+                "meta"      => [
+                    "title" => "登录",
+                    "icon"  => "el-icon-files",
+                    "roles" => [
+                        1
+                    ],
+                ],
+                "children"  => [
+
+                ],
+                "hidden"    => false,
+                "redirect"  => "",
+            ],
+        ],
+        "hidden"    => false,
+        "redirect"  => "noRedirect",
+    ],
+    [
+        "label"     => "sys",
         "path"      => "/admin/admin/index",
         "component" => "basic",
         "name"      => "admin12312312",

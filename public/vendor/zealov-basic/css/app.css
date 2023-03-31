@@ -18548,12 +18548,6 @@ section.bg-white {
   width: 100%;
 }
 
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-}
-
-
 .progress[data-v-4c086b6e] {
   position: fixed;
   top: 0px;
@@ -18871,9 +18865,3 @@ section.bg-white {
     opacity: 1;
 }
 }
-
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-}
-

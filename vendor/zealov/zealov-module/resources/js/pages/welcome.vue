@@ -1,7 +1,8 @@
 <template>
     <div class="content_container no-bg">
         <el-scrollbar>
-         welcomewelcomewelcomewelcomewelcomewelcomewelcomewelcome
+            welcome22222222222222222222
+
         </el-scrollbar>
     </div>
 </template>
