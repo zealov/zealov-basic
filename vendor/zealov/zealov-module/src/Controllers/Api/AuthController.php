@@ -9,7 +9,10 @@
 
 namespace Zealov\Controllers\Api;
 
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Zealov\Kernel\Response\ApiCode;
@@ -34,6 +37,96 @@ class AuthController extends Controller
             ->withHttpCode(ApiCode::HTTP_OK)
             ->withData($userInfo)
             ->build();
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\ArrayWithMixedKeysException
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\ConfigurationNotFoundException
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\IncompatibleTypeException
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\InvalidTypeException
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\MissingConfigurationKeyException
+     * @throws \MarcinOrlowski\ResponseBuilder\Exceptions\NotIntegerException
+     */
+    public function login(Request $request)
+    {
+        if (!captcha_api_check($request->get('code'), $request->get('captchaKey'),'flat')) {
+            return ResponseBuilder::asError(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+                ->withHttpCode(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+                ->withMessage(__('auth.captchaFailed'))
+                ->withData([
+                    'code' => [__('auth.captchaFailed')]
+                ])
+                ->build();
+        }
+        $validator = $this->validateLogin($request);
+        if ($error = $validator->errors()->first()) {
+            return ResponseBuilder::asError(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+                ->withHttpCode(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+                ->withData($validator->errors())
+                ->withMessage(__($error))
+                ->build();
+        }
+        $credentials = $request->only($this->username() , 'password');
+        if ($token = $this->guard()->attempt($credentials)) {
+
+            return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+                ->withHttpCode(ApiCode::HTTP_OK)
+                ->withData($this->respondWithTokenData($token))
+                ->build();
+        }
+        return ResponseBuilder::asError(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+            ->withHttpCode(ApiCode::HTTP_UNPROCESSABLE_ENTITY)
+            ->withMessage(__('auth.failed'))
+            ->withData([
+                $this->username() => [__('auth.failed')]
+            ])
+            ->build();
+    }
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return Guard
+     */
+    protected function guard(): Guard
+    {
+        return Auth::guard('admin');
+    }
+    /**
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return array
+     */
+    protected function respondWithTokenData(string $token): array
+    {
+        return [
+            'access_token' => $token,
+//            'token_type'   => 'bearer',
+//            'expires_in'   => $this->guard()->factory()->getTTL() * 60
+        ];
+    }
+
+
+    protected function validateLogin(Request $request)
+    {
+        $rules = [
+            $this->username() => 'required|string',
+            'password'        => 'required|string'
+        ];
+        $message = [
+            $this->username().'.required'               => '请填写姓名',
+            'password.required'               => '密码不能为空',
+        ];
+        return \Validator::make($request->all(), $rules, $message);
+
+    }
+
+    public function username()
+    {
+        return 'name';
     }
 
     /**

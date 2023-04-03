@@ -2,11 +2,11 @@
 return [
     [
         "label"     => "sys",
-        "path"      => "/admin/login",
-        "component" => "default",
-        "name"      => "login",
+        "path"      => "/admin/admin/index",
+        "component" => "basic",
+        "name"      => "adminindexccasda",
         "meta"      => [
-            "title" => "登录",
+            "title" => "项目管理1",
             "icon"  => "el-icon-files",
             "roles" => [
                 1
@@ -15,19 +15,19 @@ return [
         "children"  => [
             [
                 "label"     => "sys",
-                "path"      => "/admin/login",
-                "component" => "login",
-                "name"      => "admin.login",
+                "path"      => "/admin/admin/index2",
+                "component" => "welcome1",
+                "name"      => "adminindex.adminindexsss",
                 "meta"      => [
-                    "title" => "登录",
+                    "title" => "测试项目管理",
                     "icon"  => "el-icon-files",
                     "roles" => [
                         1
                     ],
                 ],
-                "children"  => [
-
-                ],
+//                "children"  => [
+//
+//                ],
                 "hidden"    => false,
                 "redirect"  => "",
             ],
@@ -37,9 +37,9 @@ return [
     ],
     [
         "label"     => "sys",
-        "path"      => "/admin/admin/index",
+        "path"      => "/admin/admin/index3",
         "component" => "basic",
-        "name"      => "admin12312312",
+        "name"      => "adminindex",
         "meta"      => [
             "title" => "项目管理",
             "icon"  => "el-icon-files",
@@ -50,11 +50,9 @@ return [
         "children"  => [
             [
                 "label"     => "sys",
-                "id"        => 50,
-                "pid"       => 0,
-                "path"      => "/admin/admin/index",
-                "component" => "welcome1",
-                "name"      => "admin123123",
+                "path"      => "/admin/admin/index3",
+                "component" => "welcome",
+                "name"      => "adminindex.adminindex",
                 "meta"      => [
                     "title" => "测试项目管理",
                     "icon"  => "el-icon-files",
@@ -68,24 +66,6 @@ return [
                 "hidden"    => false,
                 "redirect"  => "",
             ],
-            [
-                "label"     => "sys",
-                "path"      => "/admin/admin/index2",
-                "component" => "welcome2",
-                "name"      => "admin12312322",
-                "meta"      => [
-                    "title" => "测试项目管理2",
-                    "icon"  => "el-icon-files",
-                    "roles" => [
-                        1
-                    ]
-                ],
-                "children"  => [
-
-                ],
-                "hidden"    => false,
-                "redirect"  => "",
-            ]
         ],
         "hidden"    => false,
         "redirect"  => "noRedirect",

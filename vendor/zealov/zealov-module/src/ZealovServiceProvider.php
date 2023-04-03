@@ -2,6 +2,7 @@
 
 namespace Zealov;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Zealov\Kernel\Traits\ModuleTrait;
@@ -29,10 +30,16 @@ class ZealovServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/zealov.php', 'zealov');
-
+        $this->loadAdminAuthConfig();
         $this->registerModuleMiddlewares();
         $this->commands($this->commands);
     }
+
+    protected function loadAdminAuthConfig()
+    {
+        config(Arr::dot(config('zealov.auth', []), 'auth.'));
+    }
+
 
     /**
      * 注册模块中间件

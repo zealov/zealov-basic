@@ -8,13 +8,6 @@ export function login(data) {
   })
 }
 
-export function jaccountLogin(data) {
-  return request({
-    url: '/jaccountLogin',
-    method: 'post',
-    data
-  })
-}
 
 export function getInfo(data) {
   return request({
@@ -31,20 +24,7 @@ export function logout() {
   })
 }
 
-export function jaccountLogout(data) {
-  return request({
-    url: '/jaccountLoginOut',
-    method: 'post',
-    data
-  })
-}
 
-export function refresh() {
-  return request({
-    url: '/refresh',
-    method: 'post'
-  })
-}
 
 export function users(data) {
   return request({
@@ -62,26 +42,11 @@ export function user(data) {
   })
 }
 
-export function deleted(data) {
-  return request({
-    url: '/user/delete',
-    method: 'post',
-    data
-  })
-}
 
-export function create(data) {
-  return request({
-    url: '/user/create',
-    method: 'post',
-    data
-  })
-}
-
-export function update(data) {
-  return request({
-    url: '/user/update',
-    method: 'post',
-    data
-  })
+export function captcha (data) {
+    return request({
+        url: '/captcha',
+        method: 'post',
+        data
+    })
 }

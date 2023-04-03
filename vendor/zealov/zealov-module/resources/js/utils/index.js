@@ -499,7 +499,7 @@ export function getLabelRoute(path, options) {
                  label = item.label
                 break
             }
-            if (item != undefined && item.children.length != 0) {
+            if (item != undefined && item.children!=undefined && item.children.length != 0) {
                 const label1 = getLabelRoute(path, item.children)
                 if (label1) {
                     label = label1

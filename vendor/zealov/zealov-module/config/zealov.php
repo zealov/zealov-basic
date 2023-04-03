@@ -15,4 +15,19 @@ return [
     'api' => [
         'prefix' => trim(env('API_PATH', 'api'), '/'),
     ],
+    'auth'=>[
+        'guard' => 'admin',
+        'guards' => [
+            'admin' => [
+                'driver' => 'jwt',
+                'provider' => 'admin',
+            ],
+        ],
+        'providers' => [
+            'admin' => [
+                'driver' => 'eloquent',
+                'model' => \Zealov\Models\Admin::class
+            ],
+        ],
+    ]
 ];

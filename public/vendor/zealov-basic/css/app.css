@@ -18548,20 +18548,6 @@ section.bg-white {
   width: 100%;
 }
 
-.progress[data-v-4c086b6e] {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  height: 2px;
-  width: 0%;
-  transition: width 0.2s, opacity 0.4s;
-  opacity: 1;
-  background-color: #efc14e;
-  z-index: 999999;
-}
-
-
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
@@ -18865,3 +18851,15 @@ section.bg-white {
     opacity: 1;
 }
 }
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+}
+
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+}
+

@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        this.getUserInfo()
+        // this.getUserInfo()
     },
     methods: {
         handleOpen(key, keyPath) {

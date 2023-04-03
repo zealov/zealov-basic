@@ -8,7 +8,8 @@ Vue.use(ElementUI);
 Vue.prototype.$Bus = new Vue();
 Vue.config.productionTip = false
 new Vue({
+    el: '#app',
     store,
     router,
-    ...App
+    render: (h) => h(App)
 })

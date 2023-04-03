@@ -1,7 +1,6 @@
 import {constantRoutes} from '~/router'
 import store from '~/store'
 import Basic from '~/layouts/basic'
-import Welcome1 from '~/pages/welcome1'
 import {newFormatUrl} from "~/utils";
 
 /**
@@ -38,7 +37,7 @@ export function getAsyncRoutes(routes,label) {
         if (item.component) {
             if (item.component === 'basic') {
                 newItem.component = Basic
-            } else {
+            }else{
                 newItem.component = () => import('~/pages/' + item.component + '.vue').then(m => m.default || m)
             }
         }
@@ -47,7 +46,6 @@ export function getAsyncRoutes(routes,label) {
                 newItem[key] = item[key]
             }
         }
-        console.log(label)
         if(newItem['label'] != label){
             newItem['path'] = newFormatUrl(item['path'])
         }

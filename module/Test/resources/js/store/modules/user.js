@@ -1,6 +1,7 @@
 
 import {
-    getInfo
+    getInfo,
+    login
 } from '~/api/user'
 export const state = {
     token: getToken(),
@@ -70,6 +71,23 @@ export const getters = {
 }
 
 export const actions = {
+    // user login
+    login({ commit }, userInfo) {
+        // const { name, password } = userInfo
+        return new Promise((resolve, reject) => {
+            login(userInfo)
+                .then((response) => {
+                    const { data } = response
+                    commit('SET_TOKEN', data.access_token)
+                    setToken(data.access_token)
+                    setLoginType('')
+                    resolve()
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    },
     // get user info
     getInfo({ commit, hasToken }) {
         return new Promise((resolve, reject) => {
@@ -90,6 +108,7 @@ export const actions = {
                         permissions,
                         unreadNotificationCount
                     } = data
+                    console.log(roles,'roles')
                     // roles must be a non-empty array
                     // roles must be a non-empty array
                     if (!roles || roles.length <= 0) {
