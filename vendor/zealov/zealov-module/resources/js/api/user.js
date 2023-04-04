@@ -1,4 +1,4 @@
-import request from '~/utils/request'
+import request from '../utils/request'
 
 export function login(data) {
   return request({
@@ -23,25 +23,6 @@ export function logout() {
     method: 'post'
   })
 }
-
-
-
-export function users(data) {
-  return request({
-    url: '/users',
-    method: 'post',
-    data
-  })
-}
-
-export function user(data) {
-  return request({
-    url: '/user',
-    method: 'post',
-    data
-  })
-}
-
 
 export function captcha (data) {
     return request({

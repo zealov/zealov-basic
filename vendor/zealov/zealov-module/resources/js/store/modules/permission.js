@@ -1,7 +1,7 @@
 import {constantRoutes} from '~/router'
 import store from '~/store'
-import Basic from '~/layouts/basic'
-import {newFormatUrl} from "~/utils";
+import Basic from '../../layouts/basic'
+import {newFormatUrl} from "../../utils/index";
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -101,7 +101,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             let accessedRoutes
             // const routes = store.getters.accessedRoutes // 获取到后台路由
-            const roles = ['admin-none']
+            const roles = store.getters['user/roles'] // 获取到用户角色
             const asyncRoutes = getAsyncRoutes(routes,label) // 对路由格式进行处理
             if (roles.includes('admin-none')) {
                 accessedRoutes = asyncRoutes || []

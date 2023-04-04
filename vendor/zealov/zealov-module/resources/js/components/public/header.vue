@@ -10,14 +10,11 @@
         <div class="right-menu">
             <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
                 <div class="avatar-wrapper">
-                    <span class="user-name">张三</span>
+                    <span class="user-name">{{ nickName }}</span>
                     <i class="el-icon-arrow-down"/>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                    <router-link to="/profile/index">
-                        <el-dropdown-item>个人信息</el-dropdown-item>
-                    </router-link>
-                    <el-dropdown-item divided @click.native="logout">
+                    <el-dropdown-item divided @click.native="logout()">
                         <span style="display:block;">退出登录</span>
                     </el-dropdown-item>
                 </el-dropdown-menu>
@@ -28,7 +25,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import Hamburger from '~/components/Hamburger'
+import Hamburger from '../Hamburger'
 
 export default {
     components: {
@@ -36,12 +33,13 @@ export default {
     },
     data() {
         return {
-            displayName: ''
+
         }
     },
     computed: {
         ...mapGetters({
             sidebar: 'app/sidebar',
+            nickName: 'user/nickName'
         })
     },
     created() {
@@ -50,6 +48,10 @@ export default {
     methods: {
         toggleSideBar() {
             this.$store.dispatch('app/toggleSideBar')
+        },
+        async logout() {
+            await this.$store.dispatch('user/logout')
+            this.$router.push(`/admin/login?redirect=${this.$route.fullPath}`)
         },
     }
 }

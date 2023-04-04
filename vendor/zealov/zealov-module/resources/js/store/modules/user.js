@@ -1,8 +1,9 @@
-
 import {
     getInfo,
-    login
-} from '~/api/user'
+    login,
+    logout
+} from '../../api/user'
+
 export const state = {
     token: getToken(),
     name: '',
@@ -23,8 +24,9 @@ import {
     removeToken,
     setLoginType,
     removeLoginType
-} from '~/utils/auth'
-import { getPermissions } from '~/utils'
+} from '../../utils/auth'
+import {getPermissions} from '../..//utils/index'
+import { resetRouter } from '~/router'
 export const mutations = {
     SET_TOKEN: (state, token) => {
         state.token = token
@@ -67,17 +69,19 @@ export const getters = {
     user: state => state.user,
     token: state => state.token,
     check: state => state.user !== null,
-    role: state => state.role
+    role: state => state.role,
+    roles: state => state.roles,
+    nickName:state=>state.nickName,
 }
 
 export const actions = {
     // user login
-    login({ commit }, userInfo) {
+    login({commit}, userInfo) {
         // const { name, password } = userInfo
         return new Promise((resolve, reject) => {
             login(userInfo)
                 .then((response) => {
-                    const { data } = response
+                    const {data} = response
                     commit('SET_TOKEN', data.access_token)
                     setToken(data.access_token)
                     setLoginType('')
@@ -89,11 +93,11 @@ export const actions = {
         })
     },
     // get user info
-    getInfo({ commit, hasToken }) {
+    getInfo({commit, hasToken}) {
         return new Promise((resolve, reject) => {
             getInfo()
                 .then((response) => {
-                    const { data } = response
+                    const {data} = response
                     if (!data) {
                         reject('Verification failed, please Login again.')
                     }
@@ -108,7 +112,7 @@ export const actions = {
                         permissions,
                         unreadNotificationCount
                     } = data
-                    console.log(roles,'roles')
+                    console.log(roles, 'roles')
                     // roles must be a non-empty array
                     // roles must be a non-empty array
                     if (!roles || roles.length <= 0) {
@@ -132,6 +136,26 @@ export const actions = {
                     commit('SET_UNREADNOTIFICATIONCOUNT', unreadNotificationCount)
                     commit('SET_ROLESDATA', roles_data)
                     resolve(data)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    },
+    // user logout
+    logout({commit, state, dispatch}) {
+        return new Promise((resolve, reject) => {
+            logout(state.token)
+                .then(() => {
+                    commit('SET_TOKEN', '')
+                    commit('SET_ROLES', [])
+                    commit('SET_ACCESSEDROUTES', [])
+                    commit('SET_UNREADNOTIFICATIONCOUNT', 0)
+                    removeToken()
+                    removeLoginType()
+                    resetRouter()
+
+                    resolve()
                 })
                 .catch((error) => {
                     reject(error)

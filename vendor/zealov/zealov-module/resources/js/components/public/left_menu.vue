@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SidebarItem from '~/components/sidebar/sidebarItem'
+import SidebarItem from '../sidebar/sidebarItem'
 import {mapGetters} from 'vuex'
-import Logo from '~/components/sidebar/Logo'
+import Logo from '../sidebar/Logo'
 
 export default {
     computed: {

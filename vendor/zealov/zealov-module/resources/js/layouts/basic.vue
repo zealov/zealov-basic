@@ -11,9 +11,9 @@
 
 <script>
 
-import headerTop from '~/components/public/header'
-import leftMenu from '~/components/public/left_menu'
-import AppMain from '~/layouts/main'
+import headerTop from '../components/public/header'
+import leftMenu from '../components/public/left_menu'
+import AppMain from '../layouts/main'
 import { mapState } from 'vuex'
 export default {
     name: 'BasicLayout',

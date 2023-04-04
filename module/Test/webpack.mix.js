@@ -11,7 +11,8 @@ mix.webpackConfig({
     resolve: {
         extensions: ['.js', '.json', '.vue'],
         alias: {
-            '~': join(__dirname, './resources/js')
+            '~': join(__dirname, './resources/js'),
+            '@': join(__dirname+'/../../vendor/zealov/zealov-module', './resources/js'),
         }
     },
     output: {

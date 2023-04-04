@@ -191,7 +191,6 @@ export default {
         handleLogin() {
             this.loading = true
             this.error = {}
-            console.log(this.loginForm)
             this.$store.dispatch('user/login', this.loginForm).then((response) => {
                 this.$router.push({
                     path: this.redirect || '/admin/admin/index1',

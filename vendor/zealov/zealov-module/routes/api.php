@@ -1,11 +1,14 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::post('me',[\Zealov\Controllers\Api\AuthController::class,'getUserInfo']);
-Route::get('me',[\Zealov\Controllers\Api\AuthController::class,'getUserInfo']);
 Route::post('captcha', [\Zealov\Controllers\Api\AuthController::class, 'captcha']);
-
 Route::post('login', [\Zealov\Controllers\Api\AuthController::class, 'login']);
+
+Route::middleware('auth:admin')->group(function () {
+    Route::post('me', [\Zealov\Controllers\Api\AuthController::class, 'getUserInfo']);
+    Route::post('logout', [\Zealov\Controllers\Api\AuthController::class, 'logout']);
+});
 

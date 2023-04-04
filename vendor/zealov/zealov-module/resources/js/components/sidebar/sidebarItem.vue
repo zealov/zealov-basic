@@ -33,8 +33,8 @@
 
 <script>
 import path from 'path'
-import {isExternal} from '~/utils/validate'
-import AppLink from '~/components/sidebar/appLink'
+import {isExternal} from '../../utils/validate'
+import AppLink from './appLink'
 
 export default {
     name: 'SidebarItem',

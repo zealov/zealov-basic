@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // Load store modules dynamically.
+//加载多个模块
+
 const requireContext = require.context('./modules', false, /.*\.js$/)
 
 const modules = requireContext.keys()

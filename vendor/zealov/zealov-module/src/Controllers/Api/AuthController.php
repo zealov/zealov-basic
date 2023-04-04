@@ -30,6 +30,8 @@ class AuthController extends Controller
             "email"     => "claption@qq.com",
             "roles"     => [1]
         ];
+        $userInfo = collect(Auth::user())->toArray();
+        $userInfo['roles'] = ['admin-none'];
         $userInfo['accessedRoutes'] = require __DIR__ . '/../../Config/AdminMenu.php';
         //获取模块下的菜单
         $userInfo['accessedRoutes'] = array_merge($userInfo['accessedRoutes'], Menu::getMenuList());
@@ -82,6 +84,20 @@ class AuthController extends Controller
             ->withData([
                 $this->username() => [__('auth.failed')]
             ])
+            ->build();
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return Response
+     */
+    public function logout(): Response
+    {
+        $this->guard()->logout();
+        return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+            ->withHttpCode(ApiCode::HTTP_OK)
+            ->withData()
             ->build();
     }
     /**

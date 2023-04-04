@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message, Notification } from 'element-ui'
 import store from '~/store'
 import router from '~/router'
-import {getBaseApi} from '~/utils'
+import {getBaseApi} from './index'
 const base_api = getBaseApi()
 console.log(base_api)
 // create an axios instance
@@ -15,7 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
     (config) => {
         config.headers.Lang = 'zh-CN'
-        const token = store.getters['auth/token']
+        const token = store.getters['user/token']
         if (token) {
             // let each request carry token
             // please modify it according to the actual situation
