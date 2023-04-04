@@ -23,12 +23,13 @@ export const constantRoutes = [
         hidden: true
     },
     {
+        label: 'sys',
         path: '/',
         component: basic,
-        redirect: '/admin/admin/index1',
+        redirect: '/admin/home',
         children: [
             {
-                path: '/admin/admin/index1',
+                path: '/admin/home',
                 name: '首页',
                 component: () => import('~/pages/welcome.vue').then(m => m.default || m),
                 meta: {title: '首页', icon: 'el-icon-house', affix: true}
@@ -69,7 +70,7 @@ async function beforeEach(to, from, next) {
     if (typeof hasToken != 'undefined') {
         console.log(to.path)
         if (to.path === '/admin/login') {
-            next({path: '/admin/admin/index1'})
+            next({path: '/admin/home'})
         } else {
             if (isToken) {
                 try {

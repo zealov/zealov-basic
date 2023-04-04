@@ -22,19 +22,19 @@ export const constantRoutes = [
         component: () => import('~/pages/login.vue').then(m => m.default || m),
         hidden: true
     },
-    {
-        path: '/',
-        component: basic,
-        redirect: '/admin/admin/index1',
-        children: [
-            {
-                path: '/admin/admin/index1',
-                name: '首页',
-                component: () => import('~/pages/welcome.vue').then(m => m.default || m),
-                meta: {title: '首页', icon: 'el-icon-house', affix: true}
-            }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: basic,
+    //     redirect: '/admin/admin/index1',
+    //     children: [
+    //         {
+    //             path: '/admin/admin/index1',
+    //             name: '首页',
+    //             component: () => import('~/pages/welcome.vue').then(m => m.default || m),
+    //             meta: {title: '首页', icon: 'el-icon-house', affix: true}
+    //         }
+    //     ]
+    // },
     // { path: '*', component: () => import(/* webpackChunkName: '' */ `~/pages/errors/404.vue`).then(m => m.default || m) }
 ]
 const router = createRouter()
@@ -69,7 +69,7 @@ async function beforeEach(to, from, next) {
     if (typeof hasToken != 'undefined') {
         console.log(to.path)
         if (to.path === '/admin/login') {
-            next({path: '/admin/admin/index1'})
+            next({path: '/admin/home'})
         } else {
             if (isToken) {
                 try {

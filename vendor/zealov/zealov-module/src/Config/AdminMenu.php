@@ -2,47 +2,14 @@
 return [
     [
         "label"     => "sys",
-        "path"      => "/admin/admin/index",
+        "path"      => "/admin/home",
         "component" => "basic",
-        "name"      => "adminindexccasda",
-        "meta"      => [
-            "title" => "项目管理1",
-            "icon"  => "el-icon-files",
-            "roles" => [
-                1
-            ],
-        ],
-        "children"  => [
-            [
-                "label"     => "sys",
-                "path"      => "/admin/admin/index2",
-                "component" => "welcome1",
-                "name"      => "adminindex.adminindexsss",
-                "meta"      => [
-                    "title" => "测试项目管理",
-                    "icon"  => "el-icon-files",
-                    "roles" => [
-                        1
-                    ],
-                ],
-//                "children"  => [
-//
-//                ],
-                "hidden"    => false,
-                "redirect"  => "",
-            ],
-        ],
+        "name"      => "home",
         "hidden"    => false,
         "redirect"  => "noRedirect",
-    ],
-    [
-        "label"     => "sys",
-        "path"      => "/admin/admin/index3",
-        "component" => "basic",
-        "name"      => "adminindex",
         "meta"      => [
-            "title" => "项目管理",
-            "icon"  => "el-icon-files",
+            "title" => "首页",
+            "icon"  => "el-icon-house",
             "roles" => [
                 1
             ],
@@ -50,25 +17,21 @@ return [
         "children"  => [
             [
                 "label"     => "sys",
-                "path"      => "/admin/admin/index3",
-                "component" => "welcome",
-                "name"      => "adminindex.adminindex",
+                "path"      => "/admin/home",
+                "component" => "home",
+                "name"      => "admin.home",
+                "hidden"    => false,
+                "redirect"  => "",
                 "meta"      => [
-                    "title" => "测试项目管理",
-                    "icon"  => "el-icon-files",
+                    "title" => "首页",
+                    "icon"  => "el-icon-house",
                     "roles" => [
                         1
                     ],
                 ],
-                "children"  => [
 
-                ],
-                "hidden"    => false,
-                "redirect"  => "",
             ],
         ],
-        "hidden"    => false,
-        "redirect"  => "noRedirect",
     ],
 ];
 
