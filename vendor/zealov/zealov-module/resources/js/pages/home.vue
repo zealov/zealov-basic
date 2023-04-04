@@ -9,7 +9,7 @@
 <script>
 
 
-import {getInfo} from '~/api/user'
+import {getInfo} from '../api/user'
 
 export default {
     layout: 'basic',

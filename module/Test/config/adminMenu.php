@@ -19,7 +19,7 @@ return [
                 "id"        => 50,
                 "pid"       => 0,
                 "path"      => "/admin/index",
-                "component" => "home",
+                "component" => "home1",
                 "name"      => "project.index",
                 "meta"      => [
                     "title" => "项目列表",

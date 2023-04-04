@@ -98,7 +98,7 @@
     </div>
 </template>
 <script>
-import {login, captcha} from '~/api/user'
+import {login, captcha} from '../api/user'
 
 export default {
     layout: 'default',

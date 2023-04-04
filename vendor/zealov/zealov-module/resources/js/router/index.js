@@ -11,8 +11,6 @@ import getPageTitle from '../utils/get-page-title'
 Vue.use(Meta)
 Vue.use(Router)
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
-// The middleware for every page of the application.
-const globalMiddleware = ['check-auth']
 
 // Load middleware modules dynamically.
 

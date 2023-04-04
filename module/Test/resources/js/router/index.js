@@ -10,19 +10,12 @@ import getPageTitle from '@/utils/get-page-title'
 Vue.use(Meta)
 Vue.use(Router)
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
-// The middleware for every page of the application.
-const globalMiddleware = ['check-auth']
 
 // Load middleware modules dynamically.
 
 export const constantRoutes = [
-    {
-        path: '/admin/login',
-        component: () => import('~/pages/login.vue').then(m => m.default || m),
-        hidden: true
-    },
 
-    // { path: '*', component: () => import(/* webpackChunkName: '' */ `~/pages/errors/404.vue`).then(m => m.default || m) }
+
 ]
 const router = createRouter()
 
@@ -99,7 +92,7 @@ async function beforeEach(to, from, next) {
                 } catch (error) {
                     console.log(error)
                     // Message.error(error || 'Has Error')
-                    next(`/admin/login?redirect=${to.path}`)
+                    // next(`/admin/login?redirect=${to.path}`)
                 }
             } else {
                 next()

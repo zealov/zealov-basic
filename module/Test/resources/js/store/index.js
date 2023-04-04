@@ -4,10 +4,9 @@ Vue.use(Vuex)
 
 // Load store modules dynamically.
 //加载多个模块
+const requireContext = require.context(__dirname+'/../../../../../vendor/zealov/zealov-module/resources/js/store/modules', false, /.*\.js$/)
 
-const requireContext = require.context('./modules', false, /.*\.js$/)
-
-const modules = requireContext.keys()
+let modules = requireContext.keys()
     .map(file =>
         [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file)]
     )
@@ -18,9 +17,23 @@ const modules = requireContext.keys()
 
         return { ...modules, [name]: module }
     }, {})
+const requireContextCurrent = require.context('./modules', false, /.*\.js$/)
 
+let modulesCurrent = requireContextCurrent.keys()
+    .map(file =>
+        [file.replace(/(^.\/)|(\.js$)/g, ''), requireContextCurrent(file)]
+    )
+    .reduce((modules, [name, module]) => {
+        if (module.namespaced === undefined) {
+            module.namespaced = true
+        }
+
+        return { ...modules, [name]: module }
+    }, {})
+const modulesAll = Object.assign(modules, modulesCurrent);
+console.log(modulesAll)
 export default new Vuex.Store({
-    modules
+    modules: modulesAll,
 })
 
 
