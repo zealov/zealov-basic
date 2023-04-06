@@ -5805,11 +5805,11 @@ class ComposerStaticInit65e449a1222d233904a2b6bf827c101b
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'Zealov\\Command\\AssertPublishCommand' => __DIR__ . '/..' . '/zealov/zealov-module/src/Command/AssertPublishCommand.php',
         'Zealov\\Controllers\\Admin\\SpaController' => __DIR__ . '/..' . '/zealov/zealov-module/src/Controllers/Admin/SpaController.php',
-        'Zealov\\Controllers\\Admin\\TestController' => __DIR__ . '/..' . '/zealov/zealov-module/src/Controllers/Admin/TestController.php',
         'Zealov\\Controllers\\Api\\AuthController' => __DIR__ . '/..' . '/zealov/zealov-module/src/Controllers/Api/AuthController.php',
         'Zealov\\Kernel\\Response\\ApiCode' => __DIR__ . '/..' . '/zealov/zealov-module/src/Kernel/Response/ApiCode.php',
         'Zealov\\Kernel\\Traits\\ModuleTrait' => __DIR__ . '/..' . '/zealov/zealov-module/src/Kernel/Traits/ModuleTrait.php',
         'Zealov\\Kernel\\Utils\\Menu' => __DIR__ . '/..' . '/zealov/zealov-module/src/Kernel/Utils/Menu.php',
+        'Zealov\\Models\\Admin' => __DIR__ . '/..' . '/zealov/zealov-module/src/Models/Admin.php',
         'Zealov\\ZealovServiceProvider' => __DIR__ . '/..' . '/zealov/zealov-module/src/ZealovServiceProvider.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );

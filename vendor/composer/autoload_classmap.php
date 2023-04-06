@@ -5253,11 +5253,11 @@ return array(
     'Whoops\\Util\\TemplateHelper' => $vendorDir . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
     'Zealov\\Command\\AssertPublishCommand' => $vendorDir . '/zealov/zealov-module/src/Command/AssertPublishCommand.php',
     'Zealov\\Controllers\\Admin\\SpaController' => $vendorDir . '/zealov/zealov-module/src/Controllers/Admin/SpaController.php',
-    'Zealov\\Controllers\\Admin\\TestController' => $vendorDir . '/zealov/zealov-module/src/Controllers/Admin/TestController.php',
     'Zealov\\Controllers\\Api\\AuthController' => $vendorDir . '/zealov/zealov-module/src/Controllers/Api/AuthController.php',
     'Zealov\\Kernel\\Response\\ApiCode' => $vendorDir . '/zealov/zealov-module/src/Kernel/Response/ApiCode.php',
     'Zealov\\Kernel\\Traits\\ModuleTrait' => $vendorDir . '/zealov/zealov-module/src/Kernel/Traits/ModuleTrait.php',
     'Zealov\\Kernel\\Utils\\Menu' => $vendorDir . '/zealov/zealov-module/src/Kernel/Utils/Menu.php',
+    'Zealov\\Models\\Admin' => $vendorDir . '/zealov/zealov-module/src/Models/Admin.php',
     'Zealov\\ZealovServiceProvider' => $vendorDir . '/zealov/zealov-module/src/ZealovServiceProvider.php',
     'voku\\helper\\ASCII' => $vendorDir . '/voku/portable-ascii/src/voku/helper/ASCII.php',
 );
