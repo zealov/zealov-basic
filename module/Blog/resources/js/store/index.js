@@ -31,7 +31,7 @@ let modulesCurrent = requireContextCurrent.keys()
         return { ...modules, [name]: module }
     }, {})
 const modulesAll = Object.assign(modules, modulesCurrent);
-console.log(modulesAll)
+// console.log(modulesAll)
 export default new Vuex.Store({
     modules: modulesAll,
 })

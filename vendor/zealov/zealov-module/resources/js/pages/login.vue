@@ -192,10 +192,11 @@ export default {
             this.loading = true
             this.error = {}
             this.$store.dispatch('user/login', this.loginForm).then((response) => {
-                this.$router.push({
-                    path: this.redirect || '/admin/home',
-                    query: this.otherQuery
-                })
+                // this.$router.push({
+                //     path: this.redirect || '/admin/home',
+                //     query: this.otherQuery
+                // })
+                window.location.href= this.redirect || '/admin/home',
                 this.loading = false
             }).catch((err) => {
                 this.error = err.data

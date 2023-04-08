@@ -4,7 +4,6 @@ import store from '~/store'
 import router from '~/router'
 import {getBaseApi} from './index'
 const base_api = getBaseApi()
-console.log(base_api)
 // create an axios instance
 const service = axios.create({
     baseURL: base_api, // url = base url + request url
@@ -59,7 +58,7 @@ service.interceptors.response.use(
                 }).then(() => {
                 })
             } else if (data.code === 401) {
-                store.dispatch('auth/logout')
+                store.dispatch('user/logout')
                 // Redirect to login.
                 router.push({ name: 'login' })
                 const config = error.response.config
@@ -114,6 +113,7 @@ service.interceptors.response.use(
                 closeOnHashChange: false,
                 roundButton: true
             })
+
             return Promise.reject(error)
         }
     }

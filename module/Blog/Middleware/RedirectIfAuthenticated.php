@@ -1,5 +1,5 @@
 <?php
-namespace Module\Test\Middleware;
+namespace Module\Blog\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;

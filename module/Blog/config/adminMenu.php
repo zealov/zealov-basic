@@ -6,6 +6,8 @@ return [
         "path"      => "/admin/blog/navigation",
         "component" => "basic",
         "name"      => "blog.navigation",
+        "hidden"    => false,
+        "redirect"  => "noRedirect",
         "meta"      => [
             "title" => "物料管理",
             "icon"  => "el-icon-files",
@@ -19,6 +21,8 @@ return [
                 "path"      => "/admin/blog/navigation",
                 "component" => "navigation",
                 "name"      => "blog.navigation.index",
+                "hidden"    => false,
+                "redirect"  => "",
                 "meta"      => [
                     "title" => "导航菜单",
                     "icon"  => "el-icon-position",
@@ -29,14 +33,14 @@ return [
                 "children"  => [
 
                 ],
-                "hidden"    => false,
-                "redirect"  => "",
             ],
             [
                 "label"     => "blog",
                 "path"      => "/admin/blog/category",
                 "component" => "category",
                 "name"      => "blog.category.index",
+                "hidden"    => false,
+                "redirect"  => "",
                 "meta"      => [
                     "title" => "分类管理",
                     "icon"  => "el-icon-s-operation",
@@ -47,11 +51,8 @@ return [
                 "children"  => [
 
                 ],
-                "hidden"    => false,
-                "redirect"  => "",
             ]
         ],
-        "hidden"    => false,
-        "redirect"  => "noRedirect",
+
     ]
 ];

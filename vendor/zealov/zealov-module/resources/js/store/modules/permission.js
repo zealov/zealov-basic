@@ -96,8 +96,6 @@ export const mutations = {
 
 export const actions = {
     generateRoutes({commit}, {routes,label}) {
-
-        console.log(routes,'routesroutesroutes')
         return new Promise((resolve, reject) => {
             let accessedRoutes
             // const routes = store.getters.accessedRoutes // 获取到后台路由

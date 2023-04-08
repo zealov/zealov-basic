@@ -16,7 +16,8 @@ export const state = {
     accessedRoute: {},
     unreadNotificationCount: 0,
     role: {},
-    perimissionsData: []
+    perimissionsData: [],
+    isToken: true
 }
 import {
     getToken,
@@ -26,7 +27,8 @@ import {
     removeLoginType
 } from '../../utils/auth'
 import {getPermissions} from '../..//utils/index'
-import { resetRouter } from '~/router'
+import {resetRouter} from '~/router'
+
 export const mutations = {
     SET_TOKEN: (state, token) => {
         state.token = token
@@ -40,6 +42,9 @@ export const mutations = {
     SET_NICKNAME: (state, name) => {
         state.nickName = name
     },
+    SET_ISTOKEN: (state, isToken) => {
+        state.isToken = isToken
+    },
     SET_AVATAR: (state, avatar) => {
         state.avatar = avatar
     },
@@ -47,7 +52,6 @@ export const mutations = {
         state.roles = roles
     },
     SET_ROLE: (state, role) => {
-        console.log(role)
         state.role = role
     },
     SET_ROLESDATA: (state, data) => {
@@ -71,7 +75,8 @@ export const getters = {
     check: state => state.user !== null,
     role: state => state.role,
     roles: state => state.roles,
-    nickName:state=>state.nickName,
+    nickName: state => state.nickName,
+    isToken: state => state.isToken
 }
 
 export const actions = {
@@ -112,7 +117,6 @@ export const actions = {
                         permissions,
                         unreadNotificationCount
                     } = data
-                    console.log(roles, 'roles')
                     // roles must be a non-empty array
                     // roles must be a non-empty array
                     if (!roles || roles.length <= 0) {
@@ -151,6 +155,7 @@ export const actions = {
                     commit('SET_ROLES', [])
                     commit('SET_ACCESSEDROUTES', [])
                     commit('SET_UNREADNOTIFICATIONCOUNT', 0)
+                    commit('SET_ISTOKEN', true)
                     removeToken()
                     removeLoginType()
                     resetRouter()

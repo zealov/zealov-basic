@@ -51,8 +51,8 @@ export default {
         },
         async logout() {
             await this.$store.dispatch('user/logout')
-            this.$router.push(`/admin/login?redirect=${this.$route.fullPath}`)
-        },
+            window.location.href = '/admin/login?redirect=' + `${this.$route.fullPath}`
+        }
     }
 }
 </script>

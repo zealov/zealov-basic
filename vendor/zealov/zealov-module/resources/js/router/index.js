@@ -46,7 +46,6 @@ function createRouter() {
 export function resetRouter(routers) {
     if (routers) {
         routers = constantRoutes.concat(routers)
-        console.log(routers)
         const newRouter = new Router({
             mode: 'history',
             scrollBehavior: () => ({ y: 0 }),
@@ -60,7 +59,7 @@ export function resetRouter(routers) {
 }
 
 const whiteList = ['/admin/login'] // no redirect whitelist
-let isToken = true
+// let isToken =
 
 async function beforeEach(to, from, next) {
     // start progress bar
@@ -69,17 +68,14 @@ async function beforeEach(to, from, next) {
     document.title = getPageTitle(to.meta.title)
     const hasToken = getToken()
     if (typeof hasToken != 'undefined') {
-        console.log(to.path)
         if (to.path === '/admin/login') {
             next({path: '/admin/home'})
         } else {
-            if (isToken) {
+            if (store.getters['user/isToken']) {
                 try {
                     const {accessedRoutes} = await store.dispatch('user/getInfo')
-                    console.log(accessedRoutes)
                     //获取当前访问路由的标签
                     const label = getLabelRoute(to.path, accessedRoutes)
-                    console.log(label)
                     const accessRoutes = await store.dispatch(
                         'permission/generateRoutes',
                         {routes: accessedRoutes, label: label},
@@ -90,7 +86,7 @@ async function beforeEach(to, from, next) {
 
                         router.addRoute(res)
                     })
-                    isToken = false //将isToken赋为 false ，否则会一直循环，崩溃
+                    store.commit('user/SET_ISTOKEN', false)//将isToken赋为 false ，否则会一直循环，崩溃
                     next({
                         ...to, // next({ ...to })的目的,是保证路由添加完了再进入页面 (可以理解为重进一次)
                         replace: true, // 重进一次, 不保留重复历史
