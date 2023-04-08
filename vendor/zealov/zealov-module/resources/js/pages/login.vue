@@ -193,7 +193,7 @@ export default {
             this.error = {}
             this.$store.dispatch('user/login', this.loginForm).then((response) => {
                 this.$router.push({
-                    path: this.redirect || '/admin/admin/index1',
+                    path: this.redirect || '/admin/home',
                     query: this.otherQuery
                 })
                 this.loading = false

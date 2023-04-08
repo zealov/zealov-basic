@@ -3,29 +3,45 @@
 return [
     [
         "label"     => "blog",
-        "path"      => "/admin/admin/project",
+        "path"      => "/admin/blog/navigation",
         "component" => "basic",
-        "name"      => "project",
+        "name"      => "blog.navigation",
         "meta"      => [
-            "title" => "项目管理",
+            "title" => "物料管理",
             "icon"  => "el-icon-files",
             "roles" => [
-                1
+                'admin'
             ],
         ],
         "children"  => [
             [
                 "label"     => "blog",
-                "id"        => 50,
-                "pid"       => 0,
-                "path"      => "/admin/index",
-                "component" => "home1",
-                "name"      => "project.index",
+                "path"      => "/admin/blog/navigation",
+                "component" => "navigation",
+                "name"      => "blog.navigation.index",
                 "meta"      => [
-                    "title" => "项目列表",
-                    "icon"  => "",
+                    "title" => "导航菜单",
+                    "icon"  => "el-icon-position",
                     "roles" => [
-                        1
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
+                "hidden"    => false,
+                "redirect"  => "",
+            ],
+            [
+                "label"     => "blog",
+                "path"      => "/admin/blog/category",
+                "component" => "category",
+                "name"      => "blog.category.index",
+                "meta"      => [
+                    "title" => "分类管理",
+                    "icon"  => "el-icon-s-operation",
+                    "roles" => [
+                        'admin'
                     ],
                 ],
                 "children"  => [

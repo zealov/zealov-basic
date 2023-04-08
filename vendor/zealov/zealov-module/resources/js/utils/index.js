@@ -517,5 +517,12 @@ export function getBaseApi() {
         return process.env.MIX_VUE_APP_BASE_API
     }
     return window.document.location.protocol + "//" + window.document.location.host + "/api";
-
 }
+
+export function getBaseHost() {
+    if (process.env.MIX_VUE_APP_BASE_Host) {
+        return process.env.MIX_VUE_APP_BASE_Host
+    }
+    return window.document.location.protocol + "//" + window.document.location.host ;
+}
+
