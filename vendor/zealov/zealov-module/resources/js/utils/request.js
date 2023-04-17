@@ -58,9 +58,6 @@ service.interceptors.response.use(
                 }).then(() => {
                 })
             } else if (data.code === 401) {
-                store.dispatch('user/logout')
-                // Redirect to login.
-                router.push({ name: 'login' })
                 const config = error.response.config
                 if (!isRefreshing) {
                     isRefreshing = true

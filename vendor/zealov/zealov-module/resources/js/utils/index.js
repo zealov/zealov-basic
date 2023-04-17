@@ -495,6 +495,9 @@ export function getLabelRoute(path, options) {
     if (options && options.length > 0) {
         for (let i = 0; i <= options.length; i++) {
             let item = options[i]
+            if(item != undefined){
+                path = path.replace(/\/\d+/, '/:id')
+            }
             if (item != undefined && item.path == path) {
                  label = item.label
                 break

@@ -74,7 +74,6 @@ async function beforeEach(to, from, next) {
                         {routes: accessedRoutes, label: label},
                     )
                     store.commit('user/SET_ACCESSEDROUTE', accessRoutes)
-
                     accessRoutes.forEach(res => {
 
                         router.addRoute(res)

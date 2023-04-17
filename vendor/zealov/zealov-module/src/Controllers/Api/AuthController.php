@@ -15,6 +15,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Zealov\Kernel\Response\ApiCode;
 use Zealov\Kernel\Utils\Menu;
 
@@ -85,6 +86,20 @@ class AuthController extends Controller
                 $this->username() => [__('auth.failed')]
             ])
             ->build();
+    }
+
+    public function refresh(){
+        try {
+            $token = $this->guard()->refresh();
+            return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+                ->withHttpCode(ApiCode::HTTP_OK)
+                ->withData($this->respondWithTokenData($token))
+                ->build();
+        } catch (JWTException $exception) {
+            return ResponseBuilder::asError(ApiCode::HTTP_TOKEN_EXPIRED)
+                ->withHttpCode(ApiCode::HTTP_TOKEN_EXPIRED)
+                ->build();
+        }
     }
 
     /**

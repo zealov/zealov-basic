@@ -364,8 +364,6 @@ import {getBaseApi, getBaseHost} from "@/utils/index";
 var diguiList = [];
 var i = 0;
 export default {
-    layout: 'basic',
-    middleware:'auth',
     data() {
         return {
             expandedKeys: [],
