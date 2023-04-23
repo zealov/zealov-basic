@@ -4,6 +4,7 @@ use Module\Blog\Api\Controller\CategoryController;
 use Module\Blog\Api\Controller\ConfigController;
 use Module\Blog\Api\Controller\FileSystemController;
 use Module\Blog\Api\Controller\NavigationController;
+use Module\Blog\Api\Controller\PageController;
 use Module\Blog\Api\Controller\PostController;
 
 //导航
@@ -28,6 +29,13 @@ Route::get('blog/post/{id}',[PostController::class,'show']);
 Route::post('blog/post',[PostController::class,'store']);
 Route::put('blog/post/{id}',[PostController::class,'update']);
 Route::delete('blog/post/{id}',[PostController::class,'destroy']);
+
+//页面
+Route::get('blog/page',[PageController::class,'index']);
+Route::get('blog/page/{id}',[PageController::class,'show']);
+Route::post('blog/page',[PageController::class,'store']);
+Route::put('blog/page/{id}',[PageController::class,'update']);
+Route::delete('blog/page/{id}',[PageController::class,'destroy']);
 
 //站点配置
 Route::post('blog/config',[ConfigController::class,'store']);

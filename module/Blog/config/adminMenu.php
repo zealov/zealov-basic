@@ -79,7 +79,7 @@ return [
                 "redirect"  => "",
                 "meta"      => [
                     "title" => "文章列表",
-                    "icon"  => "el-icon-position",
+                    "icon"  => "el-icon-postcard",
                     "roles" => [
                         'admin'
                     ],
@@ -123,7 +123,61 @@ return [
                 "children"  => [
 
                 ],
-            ]
+            ],
+            [
+                "label"     => "blog",
+                "path"      => "/admin/blog/page",
+                "component" => "page/page_list",
+                "name"      => "blog.page.index",
+                "hidden"    => false,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "页面列表",
+                    "icon"  => "el-icon-notebook-2",
+                    "roles" => [
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
+            ],
+            [
+                "label"     => "blog",
+                "path"      => "/admin/blog/page_create",
+                "component" => "page/page_create",
+                "name"      => "blog.page.create",
+                "hidden"    => true,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "创建页面",
+                    "icon"  => "el-icon-position",
+                    "roles" => [
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
+            ],
+            [
+                "label"     => "blog",
+                "path"      => "/admin/blog/page_edit/:id",
+                "component" => "page/page_edit",
+                "name"      => "blog.page.edit",
+                "hidden"    => true,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "编辑页面",
+                    "icon"  => "el-icon-position",
+                    "roles" => [
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
+            ],
         ],
 
     ],
@@ -136,7 +190,7 @@ return [
         "redirect"  => "noRedirect",
         "meta"      => [
             "title" => "系统设置",
-            "icon"  => "el-icon-files",
+            "icon"  => "el-icon-s-tools",
             "roles" => [
                 'admin'
             ],
@@ -151,7 +205,7 @@ return [
                 "redirect"  => "",
                 "meta"      => [
                     "title" => "站点设置",
-                    "icon"  => "el-icon-position",
+                    "icon"  => "el-icon-setting",
                     "roles" => [
                         'admin'
                     ],

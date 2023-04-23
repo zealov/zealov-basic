@@ -148,7 +148,7 @@ export default {
             thumbnail_url: "",
             imageLoading: false,
             category_options: [],
-            uploadData: {module: "article"},
+            uploadData: {directory: "article"},
             action: getBaseApi() + '/blog/file/upload',
             headers: {
                 Authorization: "Bearer " + getToken(),
