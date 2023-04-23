@@ -16785,12 +16785,12 @@ section.bg-white {
 /* home-tabs END */
 /* el-table */
 .el-table td {
-  padding: 15px 0 !important;
+  padding: 6px 0 !important;
 }
 
 .el-table th {
   border-top: 1px solid #EBEEF5;
-  padding: 15px 0 !important;
+  padding: 5px 0 !important;
 }
 
 .el-table .sort-caret.ascending {
@@ -17143,7 +17143,7 @@ section.bg-white {
   align-items: stretch;
   position: absolute;
   left: 20px;
-  top: 42px;
+  top: 73px;
   right: 20px;
   bottom: 20px;
 }

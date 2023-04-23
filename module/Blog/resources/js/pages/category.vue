@@ -252,11 +252,11 @@
                         clearable
                         filterable
                         :props="{
-              checkStrictly: true,
-              label: 'name',
-              value: 'id',
-              expandTrigger: 'click',
-            }"
+                          checkStrictly: true,
+                          label: 'name',
+                          value: 'id',
+                          expandTrigger: 'click',
+                        }"
                         placeholder="请选择上级分类"
                     >
                         <template slot-scope="{ node, data }">
@@ -521,9 +521,9 @@ export default {
                     this.getCategory();
                 })
                 .catch((reason) => {
-                    const { data } = reason.response;
-                    if (data.code === 422) {
-                        this.updateError = data.data;
+                    const { data } = reason;
+                    if (reason.code === 422) {
+                        this.updateError = data;
                     }
                 })
                 .finally(() => {
@@ -593,9 +593,9 @@ export default {
                     this.createCategoryVisible = false;
                 })
                 .catch((reason) => {
-                    const { data } = reason.response;
-                    if (data.code === 422) {
-                        this.createError = data.data;
+                    const { data } = reason;
+                    if (reason.code === 422) {
+                        this.createError = data;
                     }
                 })
                 .finally(() => {

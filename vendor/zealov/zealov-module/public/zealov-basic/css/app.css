@@ -16640,6 +16640,10 @@ hr {
   margin-bottom: 23px;
 }
 
+.el-table .el-table__cell {
+  padding: 5px 0 !important;
+}
+
 /*
 *@Description: 后台样式
 *@Author:      Hanli
@@ -16790,7 +16794,7 @@ section.bg-white {
 
 .el-table th {
   border-top: 1px solid #EBEEF5;
-  padding: 15px 0 !important;
+  padding: 10px 0 !important;
 }
 
 .el-table .sort-caret.ascending {
@@ -17143,7 +17147,7 @@ section.bg-white {
   align-items: stretch;
   position: absolute;
   left: 20px;
-  top: 42px;
+  top: 73px;
   right: 20px;
   bottom: 20px;
 }

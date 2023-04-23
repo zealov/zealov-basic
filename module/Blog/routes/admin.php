@@ -10,4 +10,5 @@ Route::get('blog/navigation', [NavigationController::class, 'index'])->name('adm
 Route::get('blog/category', [CategoryController::class, 'index'])->name('admin.blog.category');
 Route::get('blog/post', [PostController::class, 'index'])->name('admin.blog.post');
 Route::get('blog/post_create', [PostController::class, 'index'])->name('admin.blog.create');
-Route::get('blog/post_edit/{id}', [PostController::class, 'edit'])->name('admin.blog.edit');
+Route::get('blog/post_edit/{id}', [PostController::class, 'index'])->name('admin.blog.edit');
+Route::get('blog/siteConfig', [PostController::class, 'index'])->name('admin.system.siteConfig');

@@ -3,6 +3,7 @@ import { MessageBox, Message, Notification } from 'element-ui'
 import store from '~/store'
 import router from '~/router'
 import {getBaseApi} from './index'
+import {removeLoginType, removeToken} from "./auth";
 const base_api = getBaseApi()
 // create an axios instance
 const service = axios.create({
@@ -50,12 +51,14 @@ service.interceptors.response.use(
     (error) => {
         if (error.response !== undefined) {
             const { data } = error.response
-            console.log('data.code')
-            console.log(data.code)
             if (data.code === 430) {
                 MessageBox.confirm(data.message, '', {
                     type: 'warning'
                 }).then(() => {
+                    removeToken()
+                    removeLoginType()
+                    window.location.href='/admin/login'
+
                 })
             } else if (data.code === 401) {
                 const config = error.response.config

@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Module\Blog\Api\Controller\CategoryController;
+use Module\Blog\Api\Controller\ConfigController;
 use Module\Blog\Api\Controller\FileSystemController;
 use Module\Blog\Api\Controller\NavigationController;
 use Module\Blog\Api\Controller\PostController;
@@ -27,6 +28,14 @@ Route::get('blog/post/{id}',[PostController::class,'show']);
 Route::post('blog/post',[PostController::class,'store']);
 Route::put('blog/post/{id}',[PostController::class,'update']);
 Route::delete('blog/post/{id}',[PostController::class,'destroy']);
+
+//站点配置
+Route::post('blog/config',[ConfigController::class,'store']);
+Route::put('blog/config/{id}',[ConfigController::class,'update']);
+Route::get('blog/config',[ConfigController::class,'index']);
+Route::get('blog/config/group',[ConfigController::class,'group']);
+Route::get('blog/config/{id}',[ConfigController::class,'show']);
+
 
 //文件上传
 Route::post('blog/file/upload', [FileSystemController::class, 'upload']);

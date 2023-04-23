@@ -531,9 +531,9 @@ export default {
                     this.getNavigation();
                 })
                 .catch((reason) => {
-                    const {data} = reason.response;
-                    if (data.code === 422) {
-                        this.updateError = data.data;
+                    const { data } = reason;
+                    if (reason.code === 422) {
+                        this.updateError = data;
                     }
                 })
                 .finally(() => {
@@ -606,9 +606,9 @@ export default {
                     this.createNavigationVisible = false;
                 })
                 .catch((reason) => {
-                    const {data} = reason.response;
-                    if (data.code === 422) {
-                        this.createError = data.data;
+                    const { data } = reason;
+                    if (reason.code === 422) {
+                        this.createError = data;
                     }
                 })
                 .finally(() => {

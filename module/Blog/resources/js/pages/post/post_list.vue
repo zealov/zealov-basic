@@ -200,11 +200,11 @@ export default {
         },
         //分页操作
         handleSizeChange(val) {
-            this.current_page = val;
+            this.offset = val;
             this.getList();
         },
         handleCurrentChange(val) {
-            this.current_page = val;
+            this.offset = val;
             this.getList();
         },
     }

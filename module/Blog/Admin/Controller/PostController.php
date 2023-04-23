@@ -16,8 +16,5 @@ class PostController extends Controller
     public function index(){
         return view('module::Blog.View.admin.spa.index');
     }
-    public function edit($id){
-        return view('module::Blog.View.admin.spa.index');
-    }
 
 }
