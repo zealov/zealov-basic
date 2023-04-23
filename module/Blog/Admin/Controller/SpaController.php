@@ -11,9 +11,12 @@ namespace Module\Blog\Admin\Controller;
 
 use Illuminate\Routing\Controller;
 
-class CategoryController extends Controller
+class SpaController extends Controller
 {
-    public function index(){
+
+
+    public function __invoke()
+    {
         return view('module::Blog.View.admin.spa.index');
     }
 }
