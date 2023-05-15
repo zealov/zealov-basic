@@ -10,6 +10,6 @@ return [
         'prefix' => trim(env('API_PATH', 'api'), '/'),
     ],
     'middlewares'=>[
-        'guest' => \Module\Test\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Module\Blog\Middleware\RedirectIfAuthenticated::class,
     ],
 ];
