@@ -15557,6 +15557,44 @@ svg:not(:root).svg-inline--fa {
   z-index: 10000 !important;
 }
 
+.app_store_black {
+  padding: 10px;
+}
+.app_store_black .item {
+  flex: 1;
+  text-align: center;
+}
+
+.card_item_img {
+  width: 5.8rem;
+}
+.card_item_img img {
+  width: 5.8rem;
+}
+
+.red {
+  color: red;
+}
+
+.desc {
+  color: #9ca3af;
+}
+
+.p-5 {
+  padding: 5px;
+}
+
+.d6 {
+  font-size: 0.6rem;
+}
+
+.el-divider--horizontal {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 10px 0 !important;
+}
+
 .login-page {
   width: 100vw;
   height: 100vh;

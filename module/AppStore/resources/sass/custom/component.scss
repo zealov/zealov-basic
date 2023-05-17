@@ -183,4 +183,34 @@
 .el-loading-mask.is-fullscreen {
   z-index: 10000!important;
 }
-
+.app_store_black{
+    padding:10px;
+    .item{
+        flex:1;
+        text-align: center;
+    }
+}
+.card_item_img{
+    width:5.8rem;
+    img{
+        width:5.8rem;
+    }
+}
+.red{
+    color:red
+}
+.desc{
+    color: rgba(156,163,175,1);
+}
+.p-5{
+    padding:5px;
+}
+.d6{
+    font-size: .6rem;
+}
+.el-divider--horizontal {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 10px 0!important;
+}
