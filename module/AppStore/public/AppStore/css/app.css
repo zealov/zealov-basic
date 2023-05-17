@@ -15595,6 +15595,31 @@ svg:not(:root).svg-inline--fa {
   margin: 10px 0 !important;
 }
 
+.ub-text-primary {
+  color: #3555CC !important;
+}
+
+.el-dialog__body {
+  padding: 10px !important;
+  font-size: 0.65rem !important;
+}
+
+.dialog-block {
+  color: white;
+  line-height: 1.6rem;
+  padding: 0.8rem;
+  background-color: #111827;
+}
+
+.dialog_footer {
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.el-dialog {
+  top: 30% !important;
+}
+
 .login-page {
   width: 100vw;
   height: 100vh;
