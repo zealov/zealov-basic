@@ -61,11 +61,11 @@
             <div class="dialog-block">
                 <div v-for="(msg,msgIndex) in commandDialogMsgs" v-html="msg"></div>
                 <div v-if="!commandDialogFinish">
-                    <i class="iconfont icon-loading tw-inline-block tw-animate-spin"></i>
+                    <i class="el-icon-loading"></i>
                     当前操作已运行 {{ commandDialogRunElapse }} s ...
                 </div>
                 <div v-else>
-                    <i class="iconfont icon-check"></i>
+                    <i class="el-icon-circle-check"></i>
                     操作已运行完成
                 </div>
             </div>
@@ -123,7 +123,7 @@ export default {
             }
             if (title) {
                 this.commandDialogTitle = title
-                this.commandDialogMsgs.push('<i class="iconfont icon-hr"></i> ' + title)
+                this.commandDialogMsgs.push('<i class="el-icon-minus"></i> ' + title)
             }
             this.commandDialogRunStart = (new Date()).getTime()
             this.commandDialogRunElapse = 0

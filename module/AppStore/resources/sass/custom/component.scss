@@ -220,12 +220,14 @@
 }
 .el-dialog__body {
     padding: 10px!important;
-    font-size: 0.65rem !important;
+    font-size: 0.75rem !important;
+    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+
 }
 .dialog-block{
     color: rgba(255,255,255,1);
-    line-height: 1.6rem;
-    padding: 0.8rem;
+    line-height: 1.8rem;
+    padding: 1rem;
     background-color: rgba(17,24,39,1);
 }
 .dialog_footer{
@@ -234,4 +236,10 @@
 }
 .el-dialog {
     top: 30% !important;
+}
+.text-success{
+    color: #3bb346;
+}
+.text-danger{
+    color: #f93831;
 }
