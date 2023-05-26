@@ -29,8 +29,12 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Module\\": "module/",
-            "Zealov\\": "vendor/zealov/zealov-module/src/"
-        }
+            "Zealov\\": "vendor/zealov/zealov-module/src/",
+            "Chumper\\Zipper\\": "vendor/zipper/src/Chumper/Zipper"
+        },
+        "files": [
+            "vendor/zealov/zealov-module/src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

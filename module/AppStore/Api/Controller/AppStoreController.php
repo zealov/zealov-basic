@@ -14,14 +14,16 @@ namespace Module\AppStore\Api\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Module\AppStore\Utils\AppStoreUtil;
 use Module\Blog\Models\Category;
+use Zealov\Exception\ThrowException;
 use Zealov\Kernel\Response\ApiCode;
 
 class AppStoreController
 {
     public function install(Request $request)
     {
-        sleep(2);
+        sleep(1);
         $step = $request->get('step');
         $data = $request->get('data');
         $data = json_decode($data, true);
@@ -35,18 +37,24 @@ class AppStoreController
                 ]);
                 break;
             case 'unpackPackage':
+                $package = $data['package'];
+                $licenseKey = $data['licenseKey'];
+                $ret = AppStoreUtil::unpackModule($module, $package, $licenseKey);
+                ThrowException::throwsIfResponseError($ret);
                 return $this->doNext('install', 'installModule', array_merge([
                     '<span class="text-success">模块解压完成</span>',
                     '<span class="ub-text-white">开始安装...</span>',
                 ]),$data);
 
             case 'downloadPackage':
+                $ret = AppStoreUtil::downloadPackage(1, 1, 1);
+                ThrowException::throwsIfResponseError($ret);
                 return $this->doNext('install', 'unpackPackage', [
                     '<span class="text-success">获取安装包完成，大小 ' . '2.37 KB' . '</span>',
                     '<span class="ub-text-white">开始解压安装包...</span>'
                 ], array_merge([
-                    'package' => 'CCCCCCCC',
-                    'licenseKey' => 'LICENSE_KEY',
+                    'package' => $ret['data']['package'],
+                    'licenseKey' => $ret['data']['licenseKey'],
                 ],$data));
                 break;
             case 'checkPackage':

@@ -102,7 +102,7 @@ export default {
         },
         doInstall() {
             let module={
-                name:'blog',
+                name:'EditorImageCatchConfig',
                 title:'Blog简约主题',
                 latestVersion:'1.2.2',
                 _isLocal:false
@@ -148,16 +148,17 @@ export default {
                     }, 1000)
                 }
             }).catch(res=>{
+                console.log(res)
                 this.commandDialogMsgs.push('<i class="iconfont icon-close ub-text-danger"></i> <span class="ub-text-danger">' + res.msg + '</span>')
                 this.commandDialogFinish = true
                 return true
             })
 
         },
+        doLoad() {
 
+        },
     },
-    doLoad() {
 
-    },
 }
 </script>
