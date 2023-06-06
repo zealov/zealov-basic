@@ -14,29 +14,41 @@
         </div>
         <div class="app_store_black">
             <el-row :gutter="20">
-                <el-col :span="7">
+                <el-col :span="7"  v-for="(module,moduleIndex) in modules" :key="module.id">
                     <div class="grid-content bg-purple">
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
-                                <span>Blog简约主题</span>
-                                <el-button style="float: right; padding: 3px 0" type="text" @click="doInstall()">安装</el-button>
+                                <span>{{module.title}}</span>
                             </div>
                             <el-row :gutter="5">
                                 <el-col :span="6">
                                     <div class="card_item_img">
                                         <img
-                                            src="https://ms-assets.modstart.com/data/image/2022/07/06/12507_zlyy_1885.png"
+                                            :src="module.cover"
                                             class="image">
                                     </div>
                                 </el-col>
                                 <el-col :span="18">
                                     <div>
-                                        <div><span class="red p-5">￥49.90</span></div>
-                                        <div class="desc d6 p-5">提供纯白的简约博客主题</div>
-                                        <div class="desc d6 p-5">版本：V1.2.2</div>
+                                        <div><span class="red p-5">{{module.priceSuper?'￥'+module.priceSuper:'免费'}}</span></div>
+                                        <div class="desc d6 p-5">{{module.description}}</div>
+                                        <div class="desc d6 p-5">版本：V{{module.latestVersion}}</div>
                                     </div>
                                 </el-col>
                             </el-row>
+                            <el-divider></el-divider>
+                            <div v-if="!module._isSystem">
+                                <div v-if="!module._isInstalled">
+                                    <el-button  type="text" @click="doInstall()">安装</el-button>
+                                </div>
+                                <div v-if="module._isInstalled && module._isEnabled">
+                                    <el-button style="color: red" type="text" @click="doDisable(module)">禁用</el-button>
+                                </div>
+                                <div v-if="module._isInstalled && !module._isEnabled">
+                                    <el-button style="color: green" type="text" @click="doEnable(module)">启用</el-button>
+                                </div>
+                            </div>
+
                             <el-divider></el-divider>
                             <div>
                                 <el-button type="primary" icon="el-icon-plus" plain size="mini">其他版本</el-button>
@@ -83,6 +95,7 @@ import {custom} from '../api/appStore'
 export default {
     data() {
         return {
+            modules: [],
             activeName: 'appstore',
             commandDialogShow: false,
             commandDialogFinish: true,
@@ -92,6 +105,7 @@ export default {
         }
     },
     mounted() {
+        this.doLoad()
         setInterval(() => {
             this.commandDialogRunElapse = parseInt(((new Date()).getTime() - this.commandDialogRunStart) / 1000)
         }, 1000)
@@ -99,6 +113,17 @@ export default {
     methods: {
         handleClick(tab, event) {
             console.log(tab, event);
+        },
+        doEnable(module) {
+            this.doCommand('enable', {
+                module: module.name,
+                version: module._localVersion
+            }, null, `启用模块 ${module.title}（${module.name}）`)
+        },
+        doDisable(module) {
+            this.doCommand('disable', {
+                module: module.name,
+            }, null, `禁用模块 ${module.title}（${module.name}）`)
         },
         doInstall() {
             let module={
@@ -108,9 +133,7 @@ export default {
                 _isLocal:false
             }
             this.doCommand('install', {
-                module: module.name,
-                version: module.latestVersion,
-                isLocal: module._isLocal
+                module: module.name
             }, null, `安装模块 ${module.title}（${module.name}） V${module.latestVersion}`)
         },
         doCommand(command, data, step, title) {
@@ -156,7 +179,15 @@ export default {
 
         },
         doLoad() {
+            custom('all',{
+            }).then(res=>{
+                this.modules = res.data.modules
+                console.log(res,'res')
 
+            }).catch(res=>{
+                console.log(res)
+
+            })
         },
     },
 

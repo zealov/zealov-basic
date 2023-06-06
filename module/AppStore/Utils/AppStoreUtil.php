@@ -13,10 +13,51 @@ use Chumper\Zipper\Zipper;
 use Zealov\Exception\ThrowException;
 use Zealov\Kernel\Utils\CurlUtil;
 use Zealov\Kernel\Utils\FileUtil;
+use Zealov\ModuleManage;
 
 class AppStoreUtil
 {
     const REMOTE_BASE = 'http://zb.lsq.com';
+
+    public static function moduleData()
+    {
+        $app = 'blog';
+        $ret = CurlUtil::getJSONData(self::REMOTE_BASE . '/api/store/module', [
+            'app' => $app,
+        ]);
+        return $ret;
+    }
+
+    public static function all()
+    {
+        $result = self::moduleData();
+
+        $modules = [];
+        if (!empty($result['data']['modules'])) {
+            foreach ($result['data']['modules'] as $remote) {
+                $remote['_isLocal'] = false;
+                $remote['_isInstalled'] = false;
+                $remote['_isEnabled'] = false;
+                $remote['_localVersion'] = null;
+                $remote['_isSystem'] = false;
+                $remote['_hasConfig'] = false;
+                $modules[$remote['name']] = $remote;
+            }
+        }
+
+        foreach(ModuleManage::listModules() as $m => $config){
+
+            if (isset($modules[$m])) {
+                $modules[$m]['_isInstalled'] = $config['isInstalled'];
+                $modules[$m]['_isEnabled'] = $config['enable'];
+                $modules[$m]['_isSystem'] = $config['isSystem'];
+            }
+        }
+
+
+
+        return ['modules' => $modules];
+    }
 
     private static function baseRequest($api, $data, $token)
     {
@@ -56,7 +97,8 @@ class AppStoreUtil
         ];
     }
 
-    public static function  unpackModule($module, $package, $licenseKey){
+    public static function unpackModule($module, $package, $licenseKey)
+    {
         $results = [];
         ThrowException::throwsIf('文件不存在 ' . $package, empty($package) || !file_exists($package));
         $moduleDir = base_path('module/' . $module);

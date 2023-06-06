@@ -18,9 +18,44 @@ use Module\AppStore\Utils\AppStoreUtil;
 use Module\Blog\Models\Category;
 use Zealov\Exception\ThrowException;
 use Zealov\Kernel\Response\ApiCode;
+use Zealov\ModuleManage;
 
 class AppStoreController
 {
+
+    public function all(){
+        $data = AppStoreUtil::all();
+        return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+            ->withHttpCode(ApiCode::HTTP_OK)
+            ->withData($data)
+            ->withMessage(__('message.common.search.success'))
+            ->build();
+    }
+
+    public function enable(Request $request)
+    {
+        $data = $request->get('data');
+        $data = json_decode($data, true);
+        $module = $data['module']??"";
+        $ret = ModuleManage::enable($module);
+        ThrowException::throwsIfResponseError($ret);
+        return $this->doFinish([
+            '<span class="ub-text-success">启动成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
+        ]);
+    }
+
+    public function disable(Request $request)
+    {
+        $data = $request->get('data');
+        $data = json_decode($data, true);
+        $module = $data['module']??"";
+        $ret = ModuleManage::disable($module);
+        ThrowException::throwsIfResponseError($ret);
+        return $this->doFinish([
+            '<span class="ub-text-success">禁用成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
+        ]);
+    }
+
     public function install(Request $request)
     {
         sleep(1);
@@ -32,6 +67,11 @@ class AppStoreController
         $isLocal = $data['isLocal']??"";
         switch ($step){
             case 'installModule':
+                //安装
+                $ret = ModuleManage::install($module, true);
+                ThrowException::throwsIfResponseError($ret);
+                $ret = ModuleManage::enable($module);
+                ThrowException::throwsIfResponseError($ret);
                 return $this->doFinish([
                     '<span class="text-success">安装完成，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
                 ]);

@@ -13,6 +13,9 @@ class ZealovServiceProvider extends ServiceProvider
 
     protected $commands = [
         \Zealov\Command\AssertPublishCommand::class,
+        \Zealov\Command\ModuleInstallCommand::class,
+        \Zealov\Command\ModuleEnableCommand::class,
+        \Zealov\Command\ModuleDisableCommand::class,
     ];
 
     public function boot()
