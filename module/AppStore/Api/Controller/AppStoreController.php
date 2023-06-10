@@ -40,7 +40,7 @@ class AppStoreController
         $ret = ModuleManage::enable($module);
         ThrowException::throwsIfResponseError($ret);
         return $this->doFinish([
-            '<span class="ub-text-success">启动成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
+            '<span class="text-success">启动成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
         ]);
     }
 
@@ -52,9 +52,36 @@ class AppStoreController
         $ret = ModuleManage::disable($module);
         ThrowException::throwsIfResponseError($ret);
         return $this->doFinish([
-            '<span class="ub-text-success">禁用成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
+            '<span class="text-success">禁用成功，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
         ]);
     }
+
+    public function uninstall(Request $request)
+    {
+        $data = $request->get('data');
+        $data = json_decode($data, true);
+        $module = $data['module']??"";
+        $step = $request->get('step');
+        $version = $data['version']??"";
+        $isLocal = $data['isLocal']??"";
+        switch ($step) {
+            case 'removePackage':
+                $ret = AppStoreUtil::removeModule($module, $version);
+                ThrowException::throwsIfResponseError($ret);
+                return $this->doFinish([
+                    '<span class="text-success">卸载完成，请 <a href="javascript:;" onclick="parent.location.reload()">刷新后台</a> 查看最新系统</span>',
+                ]);
+            default:
+                $ret = ModuleManage::uninstall($module);
+                ThrowException::throwsIfResponseError($ret);
+                return $this->doNext('uninstall', 'removePackage', [
+                    '<span class="text-success">开始卸载 ' . $module . ' V' . $version . '</span>',
+                ],$data);
+
+        }
+
+    }
+
 
     public function install(Request $request)
     {

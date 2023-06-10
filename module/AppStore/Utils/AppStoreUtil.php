@@ -59,6 +59,28 @@ class AppStoreUtil
         return ['modules' => $modules];
     }
 
+    public static function removeModule($module, $version)
+    {
+        $moduleDir = base_path('module/' . $module);
+        ThrowException::throwsIf('模块目录不存在 ', !file_exists($moduleDir));
+        ThrowException::throwsIf('模块目录 module/' . $module . ' 不正常，请手动删除', !is_dir($moduleDir));
+        $moduleBackup = '_delete_.' . date('Ymd_His') . '.' . $module;
+        $moduleBackupDir = base_path("module/$moduleBackup");
+        try {
+            rename($moduleDir, $moduleBackupDir);
+        } catch (\Exception $e) {
+            ThrowException::throws("移除模块 $module 到 $moduleBackup 失败，请确保模块 $module 中没有文件正在被使用");
+        }
+        ThrowException::throwsIf('模块目录备份失败', !file_exists($moduleBackupDir));
+        return [
+            'code' => 0,
+            'msg'  => 'ok',
+            'data' => [
+
+            ]
+
+        ];
+    }
     private static function baseRequest($api, $data, $token)
     {
         return CurlUtil::postJSONBody(self::REMOTE_BASE . $api, $data, [

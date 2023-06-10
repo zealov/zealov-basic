@@ -14,11 +14,11 @@
         </div>
         <div class="app_store_black">
             <el-row :gutter="20">
-                <el-col :span="7"  v-for="(module,moduleIndex) in modules" :key="module.id">
+                <el-col :span="7" v-for="(module,moduleIndex) in modules" :key="module.id">
                     <div class="grid-content bg-purple">
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
-                                <span>{{module.title}}</span>
+                                <span>{{ module.title }}</span>
                             </div>
                             <el-row :gutter="5">
                                 <el-col :span="6">
@@ -30,23 +30,31 @@
                                 </el-col>
                                 <el-col :span="18">
                                     <div>
-                                        <div><span class="red p-5">{{module.priceSuper?'￥'+module.priceSuper:'免费'}}</span></div>
-                                        <div class="desc d6 p-5">{{module.description}}</div>
-                                        <div class="desc d6 p-5">版本：V{{module.latestVersion}}</div>
+                                        <div><span
+                                            class="red p-5">{{ module.priceSuper ? '￥' + module.priceSuper : '免费' }}</span>
+                                        </div>
+                                        <div class="desc d6 p-5">{{ module.description }}</div>
+                                        <div class="desc d6 p-5">版本：V{{ module.latestVersion }}</div>
                                     </div>
                                 </el-col>
                             </el-row>
                             <el-divider></el-divider>
                             <div v-if="!module._isSystem">
                                 <div v-if="!module._isInstalled">
-                                    <el-button  type="text" @click="doInstall()">安装</el-button>
+                                    <el-button type="text" @click="doInstall()">安装</el-button>
                                 </div>
-                                <div v-if="module._isInstalled && module._isEnabled">
-                                    <el-button style="color: red" type="text" @click="doDisable(module)">禁用</el-button>
-                                </div>
-                                <div v-if="module._isInstalled && !module._isEnabled">
-                                    <el-button style="color: green" type="text" @click="doEnable(module)">启用</el-button>
-                                </div>
+                                <a v-if="module._isInstalled && module._isEnabled" style="color: red;margin-right: 15px" type="text"
+                                     @click="doDisable(module)">
+                                    禁用
+                                </a>
+                                <a v-if="module._isInstalled && !module._isEnabled" style="color: green;margin-right: 15px" type="text"
+                                   @click="doEnable(module)">
+                                    启用
+                                </a>
+                                <a v-if="module._isInstalled && !module._isEnabled" style="color: red;margin-right: 15px" type="text"
+                                   @click="doUninstall(module)">
+                                    卸载
+                                </a>
                             </div>
 
                             <el-divider></el-divider>
@@ -101,7 +109,7 @@ export default {
             commandDialogFinish: true,
             commandDialogTitle: '',
             commandDialogMsgs: [],
-            commandDialogRunElapse:0
+            commandDialogRunElapse: 0
         }
     },
     mounted() {
@@ -126,15 +134,33 @@ export default {
             }, null, `禁用模块 ${module.title}（${module.name}）`)
         },
         doInstall() {
-            let module={
-                name:'EditorImageCatchConfig',
-                title:'Blog简约主题',
-                latestVersion:'1.2.2',
-                _isLocal:false
+            let module = {
+                name: 'EditorImageCatchConfig',
+                title: 'Blog简约主题',
+                latestVersion: '1.2.2',
+                _isLocal: false
             }
             this.doCommand('install', {
                 module: module.name
             }, null, `安装模块 ${module.title}（${module.name}） V${module.latestVersion}`)
+        },
+        doUninstall(module) {
+            this.$confirm('确认卸载?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.doCommand('uninstall', {
+                    module: module.name,
+                    version: module._localVersion,
+                    isLocal: module._isLocal
+                }, null, `卸载模块 ${module.title}（${module.name}）`)
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消卸载'
+                });
+            });
         },
         doCommand(command, data, step, title) {
             step = step || null
@@ -150,12 +176,12 @@ export default {
             }
             this.commandDialogRunStart = (new Date()).getTime()
             this.commandDialogRunElapse = 0
-            custom(command,{
+            custom(command, {
                 token: this.storeApiToken,
                 step: step,
                 data: JSON.stringify(data)
-            }).then(res=>{
-                console.log(res,'res')
+            }).then(res => {
+                console.log(res, 'res')
                 if (Array.isArray(res.data.msg)) {
                     this.commandDialogMsgs = this.commandDialogMsgs.concat(res.data.msg)
                 } else {
@@ -170,7 +196,7 @@ export default {
                         this.doCommand(res.data.command, res.data.data, res.data.step)
                     }, 1000)
                 }
-            }).catch(res=>{
+            }).catch(res => {
                 console.log(res)
                 this.commandDialogMsgs.push('<i class="iconfont icon-close ub-text-danger"></i> <span class="ub-text-danger">' + res.msg + '</span>')
                 this.commandDialogFinish = true
@@ -179,12 +205,11 @@ export default {
 
         },
         doLoad() {
-            custom('all',{
-            }).then(res=>{
+            custom('all', {}).then(res => {
                 this.modules = res.data.modules
-                console.log(res,'res')
+                console.log(res, 'res')
 
-            }).catch(res=>{
+            }).catch(res => {
                 console.log(res)
 
             })

@@ -115,6 +115,16 @@ class ModuleManage
     }
 
     /**
+     * 模块卸载
+     * @param $module
+     * @return array
+     */
+    public static function uninstall($module)
+    {
+        return self::callCommand('zealov:module-uninstall', ['module' => $module]);
+    }
+
+    /**
      * 检查模块是否存在
      * @param $name
      * @return bool

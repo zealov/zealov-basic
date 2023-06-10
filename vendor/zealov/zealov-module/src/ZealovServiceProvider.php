@@ -16,6 +16,7 @@ class ZealovServiceProvider extends ServiceProvider
         \Zealov\Command\ModuleInstallCommand::class,
         \Zealov\Command\ModuleEnableCommand::class,
         \Zealov\Command\ModuleDisableCommand::class,
+        \Zealov\Command\ModuleUninstallCommand::class,
     ];
 
     public function boot()
