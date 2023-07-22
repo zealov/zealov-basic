@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    public $table = 'blog_categories';
+    public $table = 'categories';
     protected $fillable = ['name', 'sort', 'parent_id',  'label', 'published', 'description', 'image_path'];
 
     public static function getList(array $validated)

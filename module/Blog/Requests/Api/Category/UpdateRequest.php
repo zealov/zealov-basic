@@ -31,8 +31,8 @@ class UpdateRequest extends FormRequest
 
         return [
             'id' => ['required', 'integer',],
-            'name' => ['required', 'string', Rule::unique('blog_categories')->ignore($this->category), 'between:2,60'],
-            'label' => ['required', 'string', Rule::unique('blog_categories')->ignore($this->category), 'between:2,60','regex:/^[0-9a-zA-Z_]{1,}$/'],
+            'name' => ['required', 'string', Rule::unique('categories')->ignore($this->category), 'between:2,60'],
+            'label' => ['required', 'string', Rule::unique('categories')->ignore($this->category), 'between:2,60','regex:/^[0-9a-zA-Z_]{1,}$/'],
             'parent_id' => ['nullable', 'integer'],
             'published' => ['nullable', 'integer'],
             'image_path' => ['nullable', 'string'],

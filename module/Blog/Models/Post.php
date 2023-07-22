@@ -12,7 +12,7 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $table = 'blog_posts';
+    public $table = 'posts';
     protected $fillable = ['name', 'sub_name', 'author', 'from', 'view', 'thumbnail', 'description','content', 'image_path', 'redirect', 'published', 'pinned', 'sort'];
 
     protected static function newFactory()
@@ -45,10 +45,10 @@ class Post extends Model
         return $this->morphToMany(
             Category::class,
             'subject',
-            'blog_relationship',
+            'relationship',
             'subject_id',
             'relationship_id')
-            ->where('blog_relationship.relationship_type','Module\\Blog\\Models\\Category');
+            ->where('relationship.relationship_type','Module\\Blog\\Models\\Category');
     }
 
 

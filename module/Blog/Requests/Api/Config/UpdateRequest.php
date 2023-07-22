@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'between:2,200'],
-            'key' => ['required', 'string', Rule::unique('blog_config')->ignore($this->info), 'between:2,200'],
+            'key' => ['required', 'string', Rule::unique('system_config')->ignore($this->info), 'between:2,200'],
             'group' =>['required', 'string'],
             'type' => ['required', 'string'],
             'value' => ['nullable', 'string'],

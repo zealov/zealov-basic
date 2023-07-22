@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer',],
-            'name' => ['required', 'string', Rule::unique('blog_navigations')->ignore($this->navigation), 'between:2,60'],
+            'name' => ['required', 'string', Rule::unique('navigations')->ignore($this->navigation), 'between:2,60'],
             'url' => ['nullable', 'string'],
             'category_id' => ['nullable', 'integer'],
             'parent_id' => ['nullable', 'integer'],

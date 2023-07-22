@@ -3,6 +3,7 @@
 namespace Zealov;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Zealov\Kernel\Traits\ModuleTrait;
@@ -37,6 +38,32 @@ class ZealovServiceProvider extends ServiceProvider
         $this->loadAdminAuthConfig();
         $this->registerModuleMiddlewares();
         $this->commands($this->commands);
+        $this->app->singleton('SystemConfig', config('zealov.config.systemConfig'));
+
+        $this->registerBladeDirectives();
+    }
+
+    private function registerBladeDirectives()
+    {
+        $this->app->singleton('assetPathDriver', config('zealov.asset.driver'));
+
+        Blade::directive('asset', function ($expression = '') use (&$assetBase) {
+            if (empty($expression)) {
+                return '';
+            }
+            if (PHP_VERSION_ID > 80000) {
+                $regx = '/(.+)/i';
+            } else {
+                $regx = '/\\((.+)\\)/i';
+            }
+            if (preg_match($regx, $expression, $mat)) {
+                $file = trim($mat[1], '\'" "');
+                $driver = app('assetPathDriver');
+                return $driver->getCDN($file) . $driver->getPathWithHash($file);
+            } else {
+                return '';
+            }
+        });
     }
 
     protected function loadAdminAuthConfig()

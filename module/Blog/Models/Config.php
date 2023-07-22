@@ -9,7 +9,7 @@ class Config extends Model
 {
     use HasFactory;
 
-    public $table = 'blog_config';
+    public $table = 'system_config';
     protected $fillable = ['name', 'key', 'value', 'type','group'];
 
     public static function getList($group)

@@ -19,7 +19,7 @@ return [
             [
                 "label"     => "blog",
                 "path"      => "/admin/blog/navigation",
-                "component" => "navigation",
+                "component" => "navigation/navigation",
                 "name"      => "blog.navigation.index",
                 "hidden"    => false,
                 "redirect"  => "",

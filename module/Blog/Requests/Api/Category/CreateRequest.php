@@ -30,8 +30,8 @@ class CreateRequest extends FormRequest
     {
 
         return [
-            'name' => ['required', 'string', 'unique:blog_categories', 'between:2,60'],
-            'label' => ['required', 'string', 'unique:blog_categories', 'between:2,60','regex:/^[0-9a-zA-Z_]{1,}$/'],
+            'name' => ['required', 'string', 'unique:categories', 'between:2,60'],
+            'label' => ['required', 'string', 'unique:categories', 'between:2,60','regex:/^[0-9a-zA-Z_]{1,}$/'],
             'parent_id' => ['nullable', 'integer'],
             'published' => ['nullable', 'integer'],
             'image_path' => ['nullable', 'string'],

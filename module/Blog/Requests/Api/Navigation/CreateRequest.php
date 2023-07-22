@@ -24,7 +24,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:blog_navigations', 'between:2,60'],
+            'name' => ['required', 'string', 'unique:navigations', 'between:2,60'],
             'category_id' => ['nullable', 'integer'],
             'url' => ['nullable', 'string'],
             'parent_id' => ['nullable', 'integer'],

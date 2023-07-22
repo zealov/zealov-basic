@@ -11,7 +11,7 @@ class Navigation extends Model
 
     use HasFactory;
     use SoftDeletes;
-    public $table = 'blog_navigations';
+    public $table = 'navigations';
     protected $fillable = [
         'parent_id',
         'name',

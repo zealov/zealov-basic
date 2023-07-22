@@ -12,7 +12,7 @@ class Page extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $table = 'blog_pages';
+    public $table = 'pages';
     protected $fillable = ['name', 'sub_name',  'view', 'thumbnail', 'description','content', 'image_path', 'redirect', 'published', 'sort'];
 
     protected static function newFactory()

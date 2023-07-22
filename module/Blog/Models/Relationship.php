@@ -11,7 +11,7 @@ class Relationship extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $table = 'blog_relationship';
+    public $table = 'relationship';
     protected $fillable = ['subject_type', 'subject_id', 'target_type', 'relationship_type', 'relationship_id'];
 
     protected function serializeDate(\DateTimeInterface $date)

@@ -17,7 +17,7 @@ use Zealov\ModuleManage;
 
 class AppStoreUtil
 {
-    const REMOTE_BASE = 'http://zb.lsq.com';
+    const REMOTE_BASE = 'http://www.zealov.com';
 
     public static function moduleData()
     {
@@ -93,16 +93,13 @@ class AppStoreUtil
 
     public static function downloadPackage($token, $module, $version)
     {
-//        $ret = self::baseRequest('/api/store/module_package', [
-//            'module' => $module,
-//            'version' => $version,
-//        ], $token);
-//        $package = $ret['data']['package'] ;
-        $package = self::REMOTE_BASE . '/EditorImageCatchConfig-1.1.0.zip';
-//        $packageMd5 = $ret['data']['packageMd5'];
-        $packageMd5 = 'bb1dbf2937f5e0e2979f206c6951a70e';
-//        $licenseKey = $ret['data']['licenseKey'];
-        $licenseKey = 'n9D3Y0X6PZmzvTrUsmB6aysVGsEDyMHUPaWqYJRosxHu8xEkfF';
+        $ret = self::baseRequest('/api/store/module_package', [
+            'module' => $module,
+            'version' => $version,
+        ], $token);
+        $package = $ret['data']['package'] ;
+        $packageMd5 = $ret['data']['packageMd5'];
+        $licenseKey = $ret['data']['licenseKey'];
         $data = CurlUtil::getRaw($package);
         $zipTemp = FileUtil::generateLocalTempPath('zip');
         file_put_contents($zipTemp, $data);

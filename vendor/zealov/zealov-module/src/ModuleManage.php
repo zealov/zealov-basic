@@ -12,7 +12,7 @@ namespace Zealov;
 use Illuminate\Support\Facades\Artisan;
 use Zealov\Exception\ThrowException;
 use Zealov\Kernel\Utils\FileUtil;
-use Zealov\Models\BlogConfig;
+use Zealov\Models\SystemConfig;
 
 class ModuleManage
 {
@@ -180,7 +180,7 @@ class ModuleManage
     public static function listUserInstalledModules()
     {
         try {
-            $value = BlogConfig::query()->where('key',self::MODULE_ENABLE_LIST)->value('value');
+            $value = SystemConfig::query()->where('key',self::MODULE_ENABLE_LIST)->value('value');
 
             return collect(json_decode($value,true))->map(function($item){
                 $item['isSystem'] = false;
@@ -196,7 +196,7 @@ class ModuleManage
     }
 
     public static function saveUserInstalledModules($installeds){
-        BlogConfig::query()->where('key',self::MODULE_ENABLE_LIST)->update(['value'=>json_encode($installeds)]);
+        SystemConfig::query()->where('key',self::MODULE_ENABLE_LIST)->update(['value' =>json_encode($installeds)]);
     }
 
 

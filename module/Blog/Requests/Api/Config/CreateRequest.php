@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'between:2,200'],
-            'key' => ['required', 'string', 'unique:blog_config', 'between:2,200'],
+            'key' => ['required', 'string', 'unique:system_config', 'between:2,200'],
             'value' => ['nullable', 'string'],
             'group' =>['required', 'string'],
             'type' => ['required', 'string'],

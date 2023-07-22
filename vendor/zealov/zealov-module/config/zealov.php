@@ -29,5 +29,13 @@ return [
                 'model' => \Zealov\Models\Admin::class
             ],
         ],
-    ]
+    ],
+    'config' => [
+        'systemConfig' => \Zealov\Models\SystemConfig::class,
+    ],
+    'asset' => [
+        'driver' => \Zealov\Kernel\Assets\LocalAssetsPath::class,
+        'cdn' => env('CDN_URL', '/'),
+        'image_none' => '',
+    ],
 ];

@@ -114,7 +114,7 @@ class AppStoreController
                 ]),$data);
 
             case 'downloadPackage':
-                $ret = AppStoreUtil::downloadPackage(1, 1, 1);
+                $ret = AppStoreUtil::downloadPackage(1, $module, $version);
                 ThrowException::throwsIfResponseError($ret);
                 return $this->doNext('install', 'unpackPackage', [
                     '<span class="text-success">获取安装包完成，大小 ' . '2.37 KB' . '</span>',
