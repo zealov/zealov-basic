@@ -42,10 +42,10 @@ class NavigationController extends Controller
 
     public function show($id)
     {
-        $category = Navigation::find($id)->toArray();
-        if ($category) {
+        $data = Navigation::with('chunk')->find($id)->toArray();
+        if ($data) {
             return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)->withHttpCode(ApiCode::HTTP_OK)
-                ->withData($category)
+                ->withData($data)
                 ->withMessage(__('message.common.search.success'))
                 ->build();
         }
@@ -107,4 +107,6 @@ class NavigationController extends Controller
             ->withMessage(__('message.common.update.success'))
             ->build();
     }
+
+
 }

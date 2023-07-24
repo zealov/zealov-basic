@@ -36,6 +36,24 @@ return [
             ],
             [
                 "label"     => "blog",
+                "path"      => "/admin/blog/navigation_chunk/:id",
+                "component" => "navigation/navigation_chunk",
+                "name"      => "blog.navigation.navigation_chunk",
+                "hidden"    => true,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "导航内容配置",
+                    "icon"  => "el-icon-position",
+                    "roles" => [
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
+            ],
+            [
+                "label"     => "blog",
                 "path"      => "/admin/blog/category",
                 "component" => "category",
                 "name"      => "blog.category.index",

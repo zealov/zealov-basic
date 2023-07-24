@@ -3,7 +3,6 @@
 namespace Module\Blog\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Navigation extends Model
@@ -83,6 +82,17 @@ class Navigation extends Model
             }
         }
         return $tree;
+    }
+
+
+    public function chunk(){
+        return $this->morphToMany(
+            Chunk::class,
+            'subject',
+            'relationship',
+            'subject_id',
+            'relationship_id')
+            ->where('relationship.relationship_type','Module\\Blog\\Models\\Chunk');
     }
 
 }

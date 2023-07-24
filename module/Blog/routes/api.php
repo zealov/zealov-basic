@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Module\Blog\Api\Controller\CategoryController;
+use Module\Blog\Api\Controller\ChunkController;
 use Module\Blog\Api\Controller\ConfigController;
 use Module\Blog\Api\Controller\FileSystemController;
 use Module\Blog\Api\Controller\NavigationController;
@@ -15,6 +16,11 @@ Route::put('blog/navigation/{id}', [NavigationController::class, 'update']);
 Route::post('blog/navigation', [NavigationController::class, 'store']);
 Route::post('blog/navigation/updateSort', [NavigationController::class, 'updateSort']);
 Route::delete('blog/navigation/{id}', [NavigationController::class, 'destroy']);
+
+//组块
+Route::get('blog/chunk/type', [ChunkController::class, 'type']);
+Route::post('blog/chunk', [ChunkController::class, 'store']);
+Route::post('blog/chunk/relationship', [ChunkController::class, 'relationship']);
 
 //分类
 Route::get('blog/category', [CategoryController::class, 'index']);

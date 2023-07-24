@@ -79,6 +79,14 @@
                 >
                   <i class="el-icon-plus"></i>
                 </el-button>
+                  <!-- 内容 -->
+                <el-button
+                    type="text"
+                    title="内容设置"
+                    @click="redirectEdit(data)"
+                >
+                    <i class="el-icon-document"></i>
+                </el-button>
                 <el-button
                     title="编辑"
                     type="text"
@@ -672,6 +680,10 @@ export default {
         handleDragEnd(draggingNode, dropNode, dropType, ev) {
         },
         handleDrop(draggingNode, dropNode, dropType, ev) {
+        },
+        //编辑跳转
+        redirectEdit(data) {
+            this.$router.push({ path: "/admin/blog/navigation_chunk/"+data.id});
         },
     }
 }
