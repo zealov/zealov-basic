@@ -20,6 +20,14 @@ use Zealov\Kernel\Response\ApiCode;
 
 class PageController extends Controller
 {
+    public function all(){
+       $data = Page::select('id','name')->get();
+        return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+            ->withHttpCode(ApiCode::HTTP_OK)
+            ->withData(['data'=>$data])
+            ->withMessage(__('message.common.search.success'))
+            ->build();
+    }
     public function index(GetListRequest $request)
     {
         $validated = $request->validated();

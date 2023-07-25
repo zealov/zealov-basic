@@ -3,12 +3,10 @@
 namespace Module\Blog\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Relationship extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     public $table = 'relationship';
     protected $fillable = ['subject_type', 'subject_id', 'target_type', 'relationship_type', 'relationship_id'];

@@ -28,4 +28,14 @@ class Chunk extends Model
             ->where('relationship.relationship_type','Module\\Blog\\Models\\Category');
     }
 
+    public function pages(){
+        return $this->morphToMany(
+            Page::class,
+            'subject',
+            'relationship',
+            'subject_id',
+            'relationship_id')
+            ->where('relationship.relationship_type','Module\\Blog\\Models\\Page');
+    }
+
 }

@@ -8,6 +8,7 @@ use Module\Blog\Api\Controller\FileSystemController;
 use Module\Blog\Api\Controller\NavigationController;
 use Module\Blog\Api\Controller\PageController;
 use Module\Blog\Api\Controller\PostController;
+use Module\Blog\Api\Controller\RelationshipController;
 
 //导航
 Route::get('blog/navigation', [NavigationController::class, 'index']);
@@ -39,6 +40,7 @@ Route::delete('blog/post/{id}', [PostController::class, 'destroy']);
 
 //页面
 Route::get('blog/page', [PageController::class, 'index']);
+Route::get('blog/page/all', [PageController::class, 'all']);
 Route::get('blog/page/{id}', [PageController::class, 'show']);
 Route::post('blog/page', [PageController::class, 'store']);
 Route::put('blog/page/{id}', [PageController::class, 'update']);
@@ -54,3 +56,6 @@ Route::get('blog/config/{id}', [ConfigController::class, 'show']);
 
 //文件上传
 Route::post('blog/file/upload', [FileSystemController::class, 'upload']);
+
+//关联
+Route::get('blog/relationship/entity',[RelationshipController::class,'entity']);

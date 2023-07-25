@@ -29,5 +29,10 @@ class Model extends BaseModel
             'name'  => '分类',
             'model' => 'Module\Blog\Models\Category',
         ],
+        'chunks'=>[
+            'table' => 'chunks',
+            'name'  => '关联块',
+            'model' => 'Module\Blog\Models\Chunk',
+        ]
     ];
 }

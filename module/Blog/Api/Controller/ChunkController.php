@@ -57,8 +57,8 @@ class ChunkController extends Controller
     public function relationship(RelationshipRequest $request){
         $validated = $request->validated();
         $chunk = Chunk::find($validated['chunk_id']);
+
         $tableMap = Model::tableMap;
-        $model = new $tableMap[$validated['relationship_type']]['model'];
         $fun = $validated['relationship_type'];
         $chunk->$fun()->sync([$validated['relationship_id']=>['relationship_type' =>$tableMap[$validated['relationship_type']]['model']]]);
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
@@ -67,6 +67,9 @@ class ChunkController extends Controller
             ->withMessage(__('message.common.create.success'))
             ->build();
     }
+
+
+
 
 
 }

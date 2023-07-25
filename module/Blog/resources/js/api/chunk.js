@@ -4,7 +4,7 @@ export function type(data) {
     return request({
         url: "/blog/chunk/type",
         method: "get",
-        data,
+        params:data,
     });
 }
 export function store(data) {
@@ -14,3 +14,12 @@ export function store(data) {
         data,
     });
 }
+
+export function relationship(data) {
+    return request({
+        url: "/blog/chunk/relationship",
+        method: "post",
+        data,
+    });
+}
+

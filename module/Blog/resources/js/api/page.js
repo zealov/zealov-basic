@@ -6,6 +6,14 @@ export function index(data) {
         params: data,
     });
 }
+export function all(data) {
+    return request({
+        url: "/blog/page/all",
+        method: "get",
+        params: data,
+    });
+}
+
 export function store(data) {
     return request({
         url: "/blog/page",

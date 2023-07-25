@@ -4,7 +4,7 @@
                  class="tabs fixed-top">
             <el-tab-pane label="基本信息"
                          name="basic">
-                <div>asd</div>
+
             </el-tab-pane>
             <el-tab-pane v-for="chunk in chunks"
                          :key="chunk.id"
@@ -12,6 +12,9 @@
                          :name="chunk.id+chunk.name">
                 <template v-if="chunk.type == 'posts'">
                     <Post :id="chunk.id" v-if="activeTab ==chunk.id+chunk.name "></Post>
+                </template>
+                <template v-if="chunk.type == 'pages'">
+                    <Page :id="chunk.id" v-if="activeTab ==chunk.id+chunk.name "></Page>
                 </template>
             </el-tab-pane>
         </el-tabs>
@@ -55,6 +58,7 @@
 import {show} from "../../api/navigation";
 import {type,store} from "../../api/chunk";
 import Post from '../chunk/post'
+import Page from '../chunk/page'
 export default {
     data(){
         return {
@@ -79,6 +83,7 @@ export default {
     },
     components: {
         Post,
+        Page,
     },
     methods: {
         getChunk(id) {
