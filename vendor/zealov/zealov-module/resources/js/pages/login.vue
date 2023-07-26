@@ -14,7 +14,7 @@
                         <el-col :xs="24" :sm="24" :md="12" class="left-col">
                             <div class="login-left">
                                 <div class="img">
-                                    <img src="/images/img_login.png" alt="">
+<!--                                    <img src="/images/img_login.png" alt="">-->
                                 </div>
                             </div>
                         </el-col>
