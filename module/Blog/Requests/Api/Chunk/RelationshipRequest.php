@@ -32,7 +32,7 @@ class RelationshipRequest extends FormRequest
         return [
             'chunk_id' => ['required', 'integer'],
             'relationship_type'=>['required'],
-            'relationship_id'=>['required','integer']
+            'relationship_id'=>['required']
         ];
     }
 

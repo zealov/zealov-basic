@@ -19,30 +19,80 @@
                         <el-table-column
                             prop="id"
                             :show-overflow-tooltip="true"
-                            width="55"
+                            width="100"
                             align="center"
                             label="ID"
                         >
                         </el-table-column>
                         <el-table-column
+                            align="center"
+                            label="缩略图"
+                            prop="path"
+                            width="120"
+                        >
+                            <template slot-scope="scope">
+                                <img
+                                    v-if="scope.row.path"
+                                    :src="scope.row.path"
+                                    class="thumbImg"
+                                />
+                                <img v-else src="images/demo.jpg" class="thumbImg" />
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column
                             prop="name"
                             :show-overflow-tooltip="true"
-                            min-width="40%"
-                            label="页面标题"
+                            min-width="30%"
+                            label="名称"
+                        ><template slot-scope="scope">
+                            <el-link
+                                :href="complete(scope.row.path)"
+                                target="_blank"
+                                type="primary"
+                            >
+                                {{ scope.row.name }}
+                            </el-link>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            :show-overflow-tooltip="true"
+                            label="大小"
+                            prop="size"
+                            min-width="90"
+                        >
+                            <template slot-scope="scope">
+                                {{ toFormatSize(scope.row.size) }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="created_at"
+                            :show-overflow-tooltip="true"
+                            min-width="90"
+                            sortable
+                            align="center"
+                            label="创建时间"
                         >
                         </el-table-column>
+                        <el-table-column
+                            prop="label"
+                            :show-overflow-tooltip="true"
+                            min-width="90"
+                            align="center"
+                            label="状态"
+                        >
+                            <template slot-scope="scope">
+                                <el-tag
+                                    v-if="scope.row.published == 1"
+                                    type="success"
+                                    size="small"
+                                    style="margin: 0 3px"
+                                >已发布</el-tag>
+                                <el-tag v-else type="info" size="small" style="margin: 0 3px">未发布</el-tag>
+                            </template>
+                        </el-table-column>
                     </el-table>
-                </div>
-                <div class="footer_container is-sticky-bottom">
-                    <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="current_page"
-                        :pager-count="total_pages"
-                        :page-size="per_page"
-                        layout="total, prev, pager, next, jumper"
-                        :total="total"
-                    ></el-pagination>
                 </div>
             </div>
         </el-scrollbar>
@@ -68,8 +118,6 @@
                         default-expand-all
                         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
                         @selection-change="handleSelectionChange"
-                        @select="selectFun"
-                        @select-all="selectAllFun"
                         max-height="500px"
                     >
                         <el-table-column
@@ -77,16 +125,82 @@
                             width="55"
                             :selectable="selectable"
                         >
-                            <!-- @select="selectFun"
-                                  @select-all="selectAllFun" -->
-                            <!-- :selectable="selectable" -->
                         </el-table-column>
                         <el-table-column
-                            label="ID"
-                            min-width="180px"
                             prop="id"
-                            show-overflow-tooltip
+                            :show-overflow-tooltip="true"
+                            width="100"
+                            align="center"
+                            label="ID"
                         >
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            label="缩略图"
+                            prop="path"
+                            width="180"
+                        >
+                            <template slot-scope="scope">
+                                <img
+                                    v-if="scope.row.path"
+                                    :src="scope.row.path"
+                                    class="thumbImg"
+                                />
+                                <img v-else src="images/demo.jpg" class="thumbImg" />
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column
+                            prop="name"
+                            :show-overflow-tooltip="true"
+                            min-width="30%"
+                            label="名称"
+                        ><template slot-scope="scope">
+                            <el-link
+                                :href="complete(scope.row.path)"
+                                target="_blank"
+                                type="primary"
+                            >
+                                {{ scope.row.name }}
+                            </el-link>
+                        </template>
+                        </el-table-column>
+                        <el-table-column
+                            align="center"
+                            :show-overflow-tooltip="true"
+                            label="大小"
+                            prop="size"
+                            min-width="90"
+                        >
+                            <template slot-scope="scope">
+                                {{ toFormatSize(scope.row.size) }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="created_at"
+                            :show-overflow-tooltip="true"
+                            min-width="90"
+                            sortable
+                            align="center"
+                            label="创建时间"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                            prop="label"
+                            :show-overflow-tooltip="true"
+                            min-width="90"
+                            align="center"
+                            label="状态"
+                        >
+                            <template slot-scope="scope">
+                                <el-tag
+                                    v-if="scope.row.published == 1"
+                                    type="success"
+                                    size="small"
+                                    style="margin: 0 3px"
+                                >已发布</el-tag>
+                                <el-tag v-else type="info" size="small" style="margin: 0 3px">未发布</el-tag>
+                            </template>
                         </el-table-column>
                         <!-- 空状态 -->
                         <div
@@ -106,16 +220,18 @@
                     </el-table>
                 </div>
 
-                <!-- <div class="ala-table_foot">
-                  <el-pagination @size-change="handleSizeChange"
-                                 @current-change="handleCurrentChange"
-                                 :current-page="currentPage"
-                                 :page-sizes="[ 20, 50, 100]"
-                                 :page-size="10"
-                                 layout="total, sizes, prev, pager, next, jumper"
-                                 :total="100">
-                  </el-pagination>
-                </div> -->
+                <!-- 分页 -->
+                <div class="footer_container is-sticky-bottom">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="offset"
+                        :pager-count="total_pages"
+                        :page-size="limit"
+                        layout="total, prev, pager, next, jumper"
+                        :total="total"
+                    ></el-pagination>
+                </div>
             </div>
             <template #footer>
         <span class="dialog-footer">
@@ -128,8 +244,10 @@
 </template>
 <script>
 import { all } from "../../api/page";
+import {index} from "../../api/file";
 import { relationship } from "../../api/chunk";
 import {entity} from "../../api/relationship";
+import {getBaseApi, getBaseHost,formatSize} from "@/utils/index";
 export default {
     props: {
         id: {
@@ -144,65 +262,65 @@ export default {
             tableData:[],
             multipleSelection: [],
             SelectFileDialog:false,
-            createFileForm:{
-                page_id:'',
-            },
             pageOptions:[],
             tableList:[],
-            current_page:1,
+            offset:1,
             total: 0,
-            per_page: 10,
+            limit: 10,
             total_pages: 5,
         }
     },
     mounted() {
         console.log(this.id)
-        this.getFileAll()
+        this.getFileList()
         this.getEntityList()
     },
     methods:{
+        toFormatSize(size){
+          return formatSize(size)
+        },
+        complete(path){
+            return  getBaseHost() + path;
+        },
         selectable(row) {
             //   return !row.show
             //   console.log(!row.status)
             return !row.status
         },
-        selectFun(selection, row) {
-            this.setRowIsSelect(row)
-        },
-        selectAllFun(selection) {
-            console.log(selection)
-            let isAllSelect = this.checkIsAllSelect()
-            this.tableData.forEach((item) => {
-                item.isSelect = isAllSelect
-                this.$refs.multipleTable.toggleRowSelection(item, !isAllSelect)
-                this.selectFun(selection, item)
-            })
-        },
         handleSelectionChange(val) {
-            console.log(val)
             this.multipleSelection = val
         },
         //分页操作
         handleSizeChange(val) {
-            this.current_page = val;
-            this.getEntityList();
+            this.offset = val;
+            this.getFileList();
         },
         handleCurrentChange(val) {
-            this.current_page = val;
-            this.getEntityList();
+            this.offset = val;
+            this.getFileList();
         },
-        getFileAll() {
-            all().then((response)=>{
+        getFileList() {
+            const request = {
+                offset: this.offset,
+                limit: this.limit,
+                order: 'descending',
+            }
+            index(request).then((response)=>{
                 let {data} = response
-                this.pageOptions = data.data
+                this.tableData = data.data
             })
 
         },
         createFileRelationship(){
+            console.log(this.multipleSelection)
+            let relationship_ids = []
+            this.multipleSelection.forEach(item=>{
+                 relationship_ids.push(item.id)
+            })
             let createForm = {
                 chunk_id:this.id,
-                relationship_type:"pages",
-                relationship_id:this.createFileForm.page_id,
+                relationship_type:"files",
+                relationship_id:relationship_ids.join(','),
             }
             relationship(createForm).then((response)=>{
                 this.$message({
@@ -216,7 +334,7 @@ export default {
         getEntityList(){
             let requestData = {
                 limit:this.per_page,
-                offset:this.current_page,
+                offset:this.offset,
                 subject_type:'chunks',
                 subject_id:this.id,
             }

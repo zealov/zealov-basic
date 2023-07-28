@@ -15,6 +15,7 @@ use Module\Blog\Models\Chunk;
 use Module\Blog\Models\Config;
 use Module\Blog\Models\Model;
 use Module\Blog\Models\Navigation;
+use Module\Blog\Models\Relationship;
 use Module\Blog\Requests\Api\Chunk\CreateRequest;
 use Module\Blog\Requests\Api\Chunk\RelationshipRequest;
 use Zealov\Kernel\Response\ApiCode;
@@ -64,7 +65,22 @@ class ChunkController extends Controller
 
         $tableMap = Model::tableMap;
         $fun = $validated['relationship_type'];
-        $chunk->$fun()->sync([$validated['relationship_id']=>['relationship_type' =>$tableMap[$validated['relationship_type']]['model']]]);
+        $newRelationship = [];
+        $current_relationship_ids = [];
+        if(in_array($validated['relationship_type'],['files'])){
+            $current_relationship_ids = Relationship::query()
+                ->where('subject_type','Module\Blog\Models\Chunk')
+                ->where('subject_id',$validated['chunk_id'])
+                ->where('relationship_type',$tableMap[$validated['relationship_type']]['model'])
+                ->pluck('relationship_id')->toArray();
+        }
+
+        $relationship_ids = explode(',',$validated['relationship_id']);
+        $relationship_ids = array_merge($current_relationship_ids,$relationship_ids);
+        foreach ( $relationship_ids as $relationship_id) {
+            $newRelationship[$relationship_id] = ['relationship_type' => $tableMap[$validated['relationship_type']]['model']];
+        }
+        $chunk->$fun()->sync($newRelationship);
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
             ->withData()

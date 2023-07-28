@@ -56,10 +56,21 @@
                         </template>
                         </el-table-column>
                         <el-table-column
+                            align="center"
+                            :show-overflow-tooltip="true"
+                            label="大小"
+                            prop="size"
+                            min-width="90"
+                        >
+                            <template slot-scope="scope">
+                                {{ toFormatSize(scope.row.size) }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column
                             prop="created_at"
                             :show-overflow-tooltip="true"
-                            min-width="15%"
                             sortable
+                            min-width="90"
                             align="center"
                             label="创建时间"
                         >
@@ -67,8 +78,8 @@
                         <el-table-column
                             prop="label"
                             :show-overflow-tooltip="true"
-                            min-width="15%"
                             align="center"
+                            min-width="90"
                             label="状态"
                         >
                             <template slot-scope="scope">
@@ -325,7 +336,7 @@
 <script>
 import {index, store,show,update} from "../../api/file";
 import {getToken} from "@/utils/auth";
-import {getBaseApi, getBaseHost} from "@/utils/index";
+import {getBaseApi, getBaseHost,formatSize} from "@/utils/index";
 
 
 export default {
@@ -334,7 +345,7 @@ export default {
             loadingTable:false,
             total: 0,
             offset: 1,
-            limit: 15,
+            limit: 10,
             total_pages: 5,
             expandedKeys: [],
             draggable: false,
@@ -376,6 +387,9 @@ export default {
         this.setHeader()
     },
     methods: {
+        toFormatSize(size){
+            return formatSize(size)
+        },
         complete(path){
            return  getBaseHost() + path;
         },
