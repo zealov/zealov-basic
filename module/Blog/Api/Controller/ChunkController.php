@@ -31,6 +31,10 @@ class ChunkController extends Controller
             [
                 'key'=>'pages',
                 'value'=>'页面'
+            ],
+            [
+                'key'=>'files',
+                'value'=>'文件'
             ]
         ];
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)

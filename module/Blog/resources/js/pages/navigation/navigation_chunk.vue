@@ -16,6 +16,9 @@
                 <template v-if="chunk.type == 'pages'">
                     <Page :id="chunk.id" v-if="activeTab ==chunk.id+chunk.name "></Page>
                 </template>
+                <template v-if="chunk.type == 'files'">
+                    <File :id="chunk.id" v-if="activeTab ==chunk.id+chunk.name "></File>
+                </template>
             </el-tab-pane>
         </el-tabs>
         <!-- 添加chunk -->
@@ -59,6 +62,7 @@ import {show} from "../../api/navigation";
 import {type,store} from "../../api/chunk";
 import Post from '../chunk/post'
 import Page from '../chunk/page'
+import File from '../chunk/file'
 export default {
     data(){
         return {
@@ -84,6 +88,7 @@ export default {
     components: {
         Post,
         Page,
+        File,
     },
     methods: {
         getChunk(id) {
