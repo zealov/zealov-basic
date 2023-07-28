@@ -33,6 +33,11 @@ class Model extends BaseModel
             'table' => 'chunks',
             'name'  => '关联块',
             'model' => 'Module\Blog\Models\Chunk',
+        ],
+        'files'=>[
+            'table' => 'files',
+            'name'  => '文件',
+            'model' => 'Module\Blog\Models\File',
         ]
     ];
 

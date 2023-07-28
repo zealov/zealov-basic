@@ -7,8 +7,8 @@
                         <el-button
                             size="small"
                             type="primary"
-                            @click="SelectPageDialog = true"
-                        ><i class="el-icon-s-operation"></i>选择页面</el-button>
+                            @click="SelectFileDialog = true"
+                        ><i class="el-icon-s-operation"></i>选择文件</el-button>
                     </div>
                     <div class="right">
 
@@ -48,27 +48,79 @@
         </el-scrollbar>
         <!-- 选择页面 -->
         <el-dialog
-            :visible.sync="SelectPageDialog"
-            width="750px"
+            :visible.sync="SelectFileDialog"
+            width="1200px"
             custom-class="dialog_tc"
             :close-on-click-modal="false"
         >
-            <el-form :model="createPageForm">
-                <el-form-item required >
-                    <el-select v-model="createPageForm.page_id" filterable placeholder="请选择">
-                        <el-option
-                            v-for="item in pageOptions"
-                            :key="item.id"
-                            :label="item.name"
-                            :value="item.id">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-            </el-form>
+            <div class="table-list">
+                <div
+                    style="height:500px"
+                >
+                    <el-table
+                        ref="multipleTable"
+                        v-loading="listLoading"
+                        :data="tableData"
+                        element-loading-text="Loading"
+                        fit
+                        highlight-current-row
+                        row-key="id"
+                        default-expand-all
+                        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+                        @selection-change="handleSelectionChange"
+                        @select="selectFun"
+                        @select-all="selectAllFun"
+                        max-height="500px"
+                    >
+                        <el-table-column
+                            type="selection"
+                            width="55"
+                            :selectable="selectable"
+                        >
+                            <!-- @select="selectFun"
+                                  @select-all="selectAllFun" -->
+                            <!-- :selectable="selectable" -->
+                        </el-table-column>
+                        <el-table-column
+                            label="ID"
+                            min-width="180px"
+                            prop="id"
+                            show-overflow-tooltip
+                        >
+                        </el-table-column>
+                        <!-- 空状态 -->
+                        <div
+                            slot="empty"
+                            class="empty-wrap"
+                        >
+                            <div class="empty-panel">
+                                <div class="img-box">
+                                    <img
+                                        src="/images/empty.png"
+                                        alt=""
+                                    >
+                                </div>
+                                <div class="info">暂无内容~</div>
+                            </div>
+                        </div>
+                    </el-table>
+                </div>
+
+                <!-- <div class="ala-table_foot">
+                  <el-pagination @size-change="handleSizeChange"
+                                 @current-change="handleCurrentChange"
+                                 :current-page="currentPage"
+                                 :page-sizes="[ 20, 50, 100]"
+                                 :page-size="10"
+                                 layout="total, sizes, prev, pager, next, jumper"
+                                 :total="100">
+                  </el-pagination>
+                </div> -->
+            </div>
             <template #footer>
         <span class="dialog-footer">
-          <el-button @click="SelectPageDialog = false">取 消</el-button>
-          <el-button type="primary" @click="createPageRelationship()">确 定</el-button>
+          <el-button @click="SelectFileDialog = false">取 消</el-button>
+          <el-button type="primary" @click="createFileRelationship()">确 定</el-button>
         </span>
             </template>
         </el-dialog>
@@ -87,8 +139,12 @@ export default {
     },
     data(){
         return {
-            SelectPageDialog:false,
-            createPageForm:{
+
+            listLoading: false,
+            tableData:[],
+            multipleSelection: [],
+            SelectFileDialog:false,
+            createFileForm:{
                 page_id:'',
             },
             pageOptions:[],
@@ -101,10 +157,31 @@ export default {
     },
     mounted() {
         console.log(this.id)
-        this.getPageAll()
+        this.getFileAll()
         this.getEntityList()
     },
     methods:{
+        selectable(row) {
+            //   return !row.show
+            //   console.log(!row.status)
+            return !row.status
+        },
+        selectFun(selection, row) {
+            this.setRowIsSelect(row)
+        },
+        selectAllFun(selection) {
+            console.log(selection)
+            let isAllSelect = this.checkIsAllSelect()
+            this.tableData.forEach((item) => {
+                item.isSelect = isAllSelect
+                this.$refs.multipleTable.toggleRowSelection(item, !isAllSelect)
+                this.selectFun(selection, item)
+            })
+        },
+        handleSelectionChange(val) {
+            console.log(val)
+            this.multipleSelection = val
+        },
         //分页操作
         handleSizeChange(val) {
             this.current_page = val;
@@ -114,25 +191,25 @@ export default {
             this.current_page = val;
             this.getEntityList();
         },
-        getPageAll() {
+        getFileAll() {
             all().then((response)=>{
                 let {data} = response
                 this.pageOptions = data.data
             })
 
         },
-        createPageRelationship(){
+        createFileRelationship(){
             let createForm = {
                 chunk_id:this.id,
                 relationship_type:"pages",
-                relationship_id:this.createPageForm.page_id,
+                relationship_id:this.createFileForm.page_id,
             }
             relationship(createForm).then((response)=>{
                 this.$message({
                     message: response.message,
                     type: "success",
                 });
-                this.SelectPageDialog=false
+                this.SelectFileDialog=false
                 this.getEntityList()
             })
         },
