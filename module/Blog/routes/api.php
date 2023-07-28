@@ -55,7 +55,11 @@ Route::get('blog/config/{id}', [ConfigController::class, 'show']);
 
 
 //文件上传
+Route::put('blog/file/{id}', [FileSystemController::class, 'update']);
 Route::post('blog/file/upload', [FileSystemController::class, 'upload']);
+Route::post('blog/file', [FileSystemController::class, 'store']);
+Route::get('blog/file', [FileSystemController::class, 'index']);
+Route::get('blog/file/{id}', [FileSystemController::class, 'show']);
 
 //关联
 Route::get('blog/relationship/entity',[RelationshipController::class,'entity']);

@@ -69,6 +69,24 @@ return [
                 "children"  => [
 
                 ],
+            ],
+            [
+                "label"     => "blog",
+                "path"      => "/admin/blog/file",
+                "component" => "file/file",
+                "name"      => "blog.file.index",
+                "hidden"    => false,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "文件管理",
+                    "icon"  => "el-icon-folder-opened",
+                    "roles" => [
+                        'admin'
+                    ],
+                ],
+                "children"  => [
+
+                ],
             ]
         ],
 

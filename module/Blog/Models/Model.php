@@ -35,4 +35,9 @@ class Model extends BaseModel
             'model' => 'Module\Blog\Models\Chunk',
         ]
     ];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }
