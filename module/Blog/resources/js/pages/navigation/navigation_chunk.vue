@@ -2,7 +2,7 @@
     <div class="content_container">
         <el-tabs v-model="activeTab"
                  class="tabs fixed-top">
-            <el-tab-pane label="基本信息"
+            <el-tab-pane label="模块列表"
                          name="basic">
 
             </el-tab-pane>
