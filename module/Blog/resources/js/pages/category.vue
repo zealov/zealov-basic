@@ -312,7 +312,7 @@
                         <i v-else class="el-icon-plus"></i>
                     </el-upload>
                     <div class="el-upload__tip">
-                        支持JPG/PNG格式，建议尺寸800*450px或16:9
+                        支持JPG/PNG格式
                         <br />图片大小不超过1MB
                     </div>
                 </el-form-item>

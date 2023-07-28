@@ -571,6 +571,7 @@ export default {
             this.createNavigationVisible = true;
             let parent_id = [];
             parent_id = this.parentData([], data.id, this.navigation_options);
+            console.log(parent_id)
             this.createNavigationForm.parent_id = parent_id.length == 0 ? [0] : parent_id;
         },
         parentData(parent_id, cur, category_options) {
@@ -581,7 +582,7 @@ export default {
                         this.parentData(
                             parent_id,
                             element.parent_id,
-                            category_options
+                            this.navigation_options
                         );
                     }
                 } else if (element.children instanceof Array) {
