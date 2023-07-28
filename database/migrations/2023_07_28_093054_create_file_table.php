@@ -13,7 +13,7 @@ class CreateFileTable extends Migration
      */
     public function up()
     {
-        Schema::create('file', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200)->comment('名称')->nullable();
             $table->text('description')->comment('描述')->nullable();
@@ -34,6 +34,6 @@ class CreateFileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file');
+        Schema::dropIfExists('files');
     }
 }
