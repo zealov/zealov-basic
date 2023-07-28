@@ -92,6 +92,15 @@
                                 <el-tag v-else type="info" size="small" style="margin: 0 3px">未发布</el-tag>
                             </template>
                         </el-table-column>
+                        <el-table-column align="center" label="操作" width="130">
+                            <template slot-scope="scope">
+                                <el-button
+                                    size="mini"
+                                    type="primary"
+                                    @click="removeRelationship(scope.row)"
+                                >移除</el-button>
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
             </div>
@@ -202,6 +211,7 @@
                                 <el-tag v-else type="info" size="small" style="margin: 0 3px">未发布</el-tag>
                             </template>
                         </el-table-column>
+
                         <!-- 空状态 -->
                         <div
                             slot="empty"
