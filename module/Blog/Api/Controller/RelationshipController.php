@@ -65,4 +65,34 @@ class RelationshipController extends Controller
             ->build();
 
     }
+
+    public function remove(Request $request){
+        $subject_type = $request->get('subject_type');
+        $subject_id = $request->get('subject_id');
+        $relationship_type = $request->get('relationship_type');
+        $relationship_id = $request->get('relationship_id');
+
+        $tableMap = Model::tableMap;
+        $subject_type_model = $tableMap[$subject_type]['model'];
+        $relationship_type_model = $tableMap[$relationship_type]['model'];
+        $relationship = Relationship::query()->where('subject_type',$subject_type_model)
+            ->where('subject_id',$subject_id)
+            ->where('relationship_type',$relationship_type_model)
+            ->where('relationship_id',$relationship_id)->first();
+        if(empty($relationship)){
+            return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
+                ->withHttpCode(ApiCode::HTTP_NOT_FOUND)
+                ->withMessage(__('message.common.search.failed'))
+                ->build();
+        }
+        if(Relationship::query()->where('subject_type',$subject_type_model)
+            ->where('subject_id',$subject_id)
+            ->where('relationship_type',$relationship_type_model)
+            ->where('relationship_id',$relationship_id)->delete()){
+            return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+                ->withHttpCode(ApiCode::HTTP_OK)
+                ->withMessage(__('message.common.delete.success'))
+                ->build();
+        }
+    }
 }

@@ -8,4 +8,11 @@ export function entity(data) {
     });
 }
 
+export function remove(data) {
+    return request({
+        url: "/blog/relationship/remove",
+        method: "post",
+        data,
+    });
+}
 

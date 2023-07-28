@@ -256,7 +256,7 @@
 import { all } from "../../api/page";
 import {index} from "../../api/file";
 import { relationship } from "../../api/chunk";
-import {entity} from "../../api/relationship";
+import {entity,remove} from "../../api/relationship";
 import {getBaseApi, getBaseHost,formatSize} from "@/utils/index";
 export default {
     props: {
@@ -286,6 +286,21 @@ export default {
         this.getEntityList()
     },
     methods:{
+        removeRelationship(data){
+            let requestData = {
+                subject_type:'chunks',
+                subject_id:this.id,
+                relationship_type:'files',
+                relationship_id:data.id,
+            }
+            remove(requestData).then((response)=>{
+                this.$message({
+                    message: response.message,
+                    type: "success",
+                });
+                this.getEntityList()
+            })
+        },
         toFormatSize(size){
           return formatSize(size)
         },

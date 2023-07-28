@@ -63,3 +63,4 @@ Route::get('blog/file/{id}', [FileSystemController::class, 'show']);
 
 //关联
 Route::get('blog/relationship/entity',[RelationshipController::class,'entity']);
+Route::post('blog/relationship/remove',[RelationshipController::class,'remove']);
