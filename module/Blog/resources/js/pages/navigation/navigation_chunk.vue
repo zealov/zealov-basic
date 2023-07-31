@@ -4,7 +4,7 @@
                  class="tabs fixed-top">
             <el-tab-pane label="模块列表"
                          name="basic">
-
+                <Chunk :id="this.$route.params.id" v-if="activeTab =='basic' "></Chunk>
             </el-tab-pane>
             <el-tab-pane v-for="chunk in chunks"
                          :key="chunk.id"
@@ -63,6 +63,7 @@ import {type,store} from "../../api/chunk";
 import Post from '../chunk/post'
 import Page from '../chunk/page'
 import File from '../chunk/file'
+import Chunk from '../chunk/chunk'
 export default {
     data(){
         return {
@@ -89,6 +90,7 @@ export default {
         Post,
         Page,
         File,
+        Chunk
     },
     methods: {
         getChunk(id) {
