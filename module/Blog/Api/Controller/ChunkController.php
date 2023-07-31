@@ -18,6 +18,7 @@ use Module\Blog\Models\Navigation;
 use Module\Blog\Models\Relationship;
 use Module\Blog\Requests\Api\Chunk\CreateRequest;
 use Module\Blog\Requests\Api\Chunk\RelationshipRequest;
+use Module\Blog\Requests\Api\Chunk\UpdateRequest;
 use Zealov\Kernel\Response\ApiCode;
 
 class ChunkController extends Controller
@@ -56,6 +57,39 @@ class ChunkController extends Controller
             ->withHttpCode(ApiCode::HTTP_OK)
             ->withData()
             ->withMessage(__('message.common.create.success'))
+            ->build();
+    }
+
+    public function update(UpdateRequest $request,$id){
+        $validated = $request->validated();
+        $chunk = Chunk::find($id);
+        $resultData = $chunk->update($validated);
+        if ($resultData) {
+            return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+                ->withHttpCode(ApiCode::HTTP_OK)
+                ->withData($chunk)
+                ->withMessage(__('message.common.update.success'))
+                ->build();
+        }
+
+        return ResponseBuilder::asError(ApiCode::HTTP_BAD_REQUEST)
+            ->withHttpCode(ApiCode::HTTP_BAD_REQUEST)
+            ->withMessage(__('message.common.update.fail'))
+            ->build();
+    }
+
+    public function destroy($id){
+        $chunk = Chunk::find($id);
+        if (is_null($chunk)) {
+            return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
+                ->withHttpCode(ApiCode::HTTP_NOT_FOUND)
+                ->withMessage(__('message.common.search.failed'))
+                ->build();
+        }
+        $chunk->delete();
+        return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
+            ->withHttpCode(ApiCode::HTTP_OK)
+            ->withMessage(__('message.common.delete.success'))
             ->build();
     }
 

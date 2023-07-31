@@ -4,7 +4,7 @@
                  class="tabs fixed-top">
             <el-tab-pane label="模块列表"
                          name="basic">
-                <Chunk :id="this.$route.params.id" v-if="activeTab =='basic' "></Chunk>
+                <Chunk :id="this.$route.params.id" v-if="activeTab =='basic' " @changeChunk="getChunk"></Chunk>
             </el-tab-pane>
             <el-tab-pane v-for="chunk in chunks"
                          :key="chunk.id"
@@ -22,10 +22,10 @@
             </el-tab-pane>
         </el-tabs>
         <!-- 添加chunk -->
-        <el-button size="small"
-                   type="text"
-                   class="topic-add-button"
-                   @click="addDialog = true"><i class="el-icon-plus"></i></el-button>
+<!--        <el-button size="small"-->
+<!--                   type="text"-->
+<!--                   class="topic-add-button"-->
+<!--                   @click="addDialog = true"><i class="el-icon-plus"></i></el-button>-->
         <!-- 添加block -->
         <el-dialog :visible.sync="addDialog"
                    width="560px"

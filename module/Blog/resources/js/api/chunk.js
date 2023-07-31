@@ -14,7 +14,13 @@ export function store(data) {
         data,
     });
 }
-
+export function update(id, data) {
+    return request({
+        url: "/blog/chunk/" + id,
+        method: "put",
+        data,
+    });
+}
 export function relationship(data) {
     return request({
         url: "/blog/chunk/relationship",
@@ -23,3 +29,9 @@ export function relationship(data) {
     });
 }
 
+export function destroy(id) {
+    return request({
+        url: "/blog/chunk/" + id,
+        method: "delete",
+    });
+}

@@ -20,6 +20,8 @@ Route::delete('blog/navigation/{id}', [NavigationController::class, 'destroy']);
 
 //组块
 Route::get('blog/chunk/type', [ChunkController::class, 'type']);
+Route::put('blog/chunk/{id}', [ChunkController::class, 'update']);
+Route::delete('blog/chunk/{id}', [ChunkController::class, 'destroy']);
 Route::post('blog/chunk', [ChunkController::class, 'store']);
 Route::post('blog/chunk/relationship', [ChunkController::class, 'relationship']);
 
