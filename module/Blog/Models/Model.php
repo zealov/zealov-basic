@@ -45,4 +45,8 @@ class Model extends BaseModel
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public static function navigation(){
+
+    }
 }

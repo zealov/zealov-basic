@@ -1,6 +1,5 @@
 <?php
 
-
 if (!function_exists('starts_with')) {
     function starts_with($haystack, $needles)
     {
