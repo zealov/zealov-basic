@@ -26,7 +26,7 @@ class FileSystemController extends Controller
     public function upload(UploadRequest $request): Response
     {
         $validated = $request->validated();
-        $directory = $validated['directory']??'other';
+        $directory = $validated['directory'] ?? 'other';
         $fileSystem = new FileSystem($directory);
         try {
             if (isset($validated['name'])) {
@@ -38,7 +38,7 @@ class FileSystemController extends Controller
                 ->withHttpCode(ApiCode::HTTP_OK)
                 ->withMessage(__('message.common.create.success'))
                 ->withData([
-                    'path' => '/storage/'.$path,
+                    'path'     => '/storage/' . $path,
                     'realPath' => asset('storage/' . $path)
                 ])
                 ->build();
@@ -50,7 +50,8 @@ class FileSystemController extends Controller
         }
     }
 
-    public function store(CreateRequest $request){
+    public function store(CreateRequest $request)
+    {
         $validated = $request->validated();
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
@@ -59,7 +60,8 @@ class FileSystemController extends Controller
             ->build();
     }
 
-    public function index(GetListRequest $request){
+    public function index(GetListRequest $request)
+    {
         $validated = $request->validated();
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
@@ -68,7 +70,8 @@ class FileSystemController extends Controller
             ->build();
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $file = File::find($id)->toArray();
         if (is_null($file)) {
             return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
@@ -83,7 +86,8 @@ class FileSystemController extends Controller
             ->build();
     }
 
-    public function update($id,UpdateRequest $request){
+    public function update($id, UpdateRequest $request)
+    {
         $validated = $request->validated();
         $file = File::find($id);
         $file->update($validated);
@@ -93,7 +97,6 @@ class FileSystemController extends Controller
             ->withMessage(__('message.common.update.success'))
             ->build();
     }
-
 
 
 }

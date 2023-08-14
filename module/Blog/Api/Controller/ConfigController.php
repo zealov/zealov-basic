@@ -29,7 +29,8 @@ class ConfigController extends Controller
             ->build();
     }
 
-    public function update($id,UpdateRequest $request){
+    public function update($id, UpdateRequest $request)
+    {
         $validated = $request->validated();
         $config = Config::find($id);
         $config->update($validated);

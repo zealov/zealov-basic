@@ -24,43 +24,44 @@ use Zealov\Kernel\Response\ApiCode;
 class ChunkController extends Controller
 {
 
-    public function type(){
+    public function type()
+    {
         $type = [
             [
-                'key'=>'posts',
-                'value'=>'文章'
+                'key'   => 'posts',
+                'value' => '文章'
             ],
             [
-                'key'=>'pages',
-                'value'=>'页面'
+                'key'   => 'pages',
+                'value' => '页面'
             ],
             [
-                'key'=>'files',
-                'value'=>'文件'
+                'key'   => 'files',
+                'value' => '文件'
             ]
         ];
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
-            ->withData(['data'=>$type])
+            ->withData(['data' => $type])
             ->withMessage(__('message.common.create.success'))
             ->build();
     }
 
-    public function store(CreateRequest $request){
+    public function store(CreateRequest $request)
+    {
         $validated = $request->validated();
-        $chunk = Chunk::create($validated);
         $tableMap = Model::tableMap;
-        $model = new $tableMap[$validated['subject_type']]['model'];
-        $data = $model::find($validated['subject_id']);
-        $data->chunk()->attach([$chunk->id=>['relationship_type' => 'Module\\Blog\\Models\\Chunk']]);
+        $validated['subject_type'] = $tableMap[$validated['subject_type']]['model'];
+        $chunk = Chunk::create($validated);
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
-            ->withData()
+            ->withData($chunk)
             ->withMessage(__('message.common.create.success'))
             ->build();
     }
 
-    public function update(UpdateRequest $request,$id){
+    public function update(UpdateRequest $request, $id)
+    {
         $validated = $request->validated();
         $chunk = Chunk::find($id);
         $resultData = $chunk->update($validated);
@@ -78,7 +79,8 @@ class ChunkController extends Controller
             ->build();
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $chunk = Chunk::find($id);
         if (is_null($chunk)) {
             return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
@@ -93,7 +95,8 @@ class ChunkController extends Controller
             ->build();
     }
 
-    public function relationship(RelationshipRequest $request){
+    public function relationship(RelationshipRequest $request)
+    {
         $validated = $request->validated();
         $chunk = Chunk::find($validated['chunk_id']);
 
@@ -101,17 +104,17 @@ class ChunkController extends Controller
         $fun = $validated['relationship_type'];
         $newRelationship = [];
         $current_relationship_ids = [];
-        if(in_array($validated['relationship_type'],['files'])){
+        if (in_array($validated['relationship_type'], ['files'])) {
             $current_relationship_ids = Relationship::query()
-                ->where('subject_type','Module\Blog\Models\Chunk')
-                ->where('subject_id',$validated['chunk_id'])
-                ->where('relationship_type',$tableMap[$validated['relationship_type']]['model'])
+                ->where('subject_type', 'Module\Blog\Models\Chunk')
+                ->where('subject_id', $validated['chunk_id'])
+                ->where('relationship_type', $tableMap[$validated['relationship_type']]['model'])
                 ->pluck('relationship_id')->toArray();
         }
 
-        $relationship_ids = explode(',',$validated['relationship_id']);
-        $relationship_ids = array_merge($current_relationship_ids,$relationship_ids);
-        foreach ( $relationship_ids as $relationship_id) {
+        $relationship_ids = explode(',', $validated['relationship_id']);
+        $relationship_ids = array_merge($current_relationship_ids, $relationship_ids);
+        foreach ($relationship_ids as $relationship_id) {
             $newRelationship[$relationship_id] = ['relationship_type' => $tableMap[$validated['relationship_type']]['model']];
         }
         $chunk->$fun()->sync($newRelationship);
@@ -121,9 +124,6 @@ class ChunkController extends Controller
             ->withMessage(__('message.common.create.success'))
             ->build();
     }
-
-
-
 
 
 }

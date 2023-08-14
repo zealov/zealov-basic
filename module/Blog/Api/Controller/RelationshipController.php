@@ -39,23 +39,40 @@ class RelationshipController extends Controller
         $default_mode = 'Module\Blog\Models\Category';
         $target_model = $tableMap[$type]['model'];
         //获取相关绑定分类
-        $relationship_ids = Relationship::where('subject_type', $subject_type_model)->where('subject_id', $subject_id)->where('relationship_type', $default_mode)->pluck('relationship_id')->toArray();
+        $relationship_ids = Relationship::where('subject_type', $subject_type_model)
+            ->where('subject_id', $subject_id)
+            ->where('relationship_type', $default_mode)
+            ->pluck('relationship_id')
+            ->toArray();
 
         //查询关联内容
         $model = Relationship::query()
-            ->when($relationship_ids,function ($query) use($tableMap,$type,$target_model,$relationship_ids) {
+            ->when($relationship_ids, function ($query) use (
+                $tableMap,
+                $type,
+                $target_model,
+                $relationship_ids
+            ) {
                 $query->join($tableMap[$type]['table'], 'relationship.subject_id', $tableMap[$type]['table'] . '.id')
                     ->where('relationship.subject_type', $target_model)
                     ->whereIn('relationship.relationship_id', $relationship_ids)
                     ->groupBy('relationship.subject_id');
-            })->when(empty($relationship_ids),function ($query) use($tableMap,$type,$target_model,$relationship_ids,$subject_type_model,$subject_id) {
+            })->when(empty($relationship_ids), function ($query) use (
+                $tableMap,
+                $type,
+                $target_model,
+                $relationship_ids,
+                $subject_type_model,
+                $subject_id
+            ) {
                 $query->join($tableMap[$type]['table'], 'relationship.relationship_id', $tableMap[$type]['table'] . '.id')
                     ->where('relationship.subject_type', $subject_type_model)
-                    ->where('relationship.subject_id', $subject_id)  ->groupBy('relationship.relationship_id');;
+                    ->where('relationship.subject_id', $subject_id)
+                    ->groupBy('relationship.relationship_id');
             });
         $total = $model->get()->count();
         $data = $model->skip(($offset - 1) * $limit)
-            ->orderByDesc($tableMap[$type]['table'].'.created_at')
+            ->orderByDesc($tableMap[$type]['table'] . '.created_at')
             ->take($limit)
             ->get();
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
@@ -66,7 +83,8 @@ class RelationshipController extends Controller
 
     }
 
-    public function remove(Request $request){
+    public function remove(Request $request)
+    {
         $subject_type = $request->get('subject_type');
         $subject_id = $request->get('subject_id');
         $relationship_type = $request->get('relationship_type');
@@ -75,20 +93,23 @@ class RelationshipController extends Controller
         $tableMap = Model::tableMap;
         $subject_type_model = $tableMap[$subject_type]['model'];
         $relationship_type_model = $tableMap[$relationship_type]['model'];
-        $relationship = Relationship::query()->where('subject_type',$subject_type_model)
-            ->where('subject_id',$subject_id)
-            ->where('relationship_type',$relationship_type_model)
-            ->where('relationship_id',$relationship_id)->first();
-        if(empty($relationship)){
+        $relationship = Relationship::query()
+            ->where('subject_type', $subject_type_model)
+            ->where('subject_id', $subject_id)
+            ->where('relationship_type', $relationship_type_model)
+            ->where('relationship_id', $relationship_id)
+            ->first();
+        if (empty($relationship)) {
             return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
                 ->withHttpCode(ApiCode::HTTP_NOT_FOUND)
                 ->withMessage(__('message.common.search.failed'))
                 ->build();
         }
-        if(Relationship::query()->where('subject_type',$subject_type_model)
-            ->where('subject_id',$subject_id)
-            ->where('relationship_type',$relationship_type_model)
-            ->where('relationship_id',$relationship_id)->delete()){
+        if (Relationship::query()->where('subject_type', $subject_type_model)
+            ->where('subject_id', $subject_id)
+            ->where('relationship_type', $relationship_type_model)
+            ->where('relationship_id', $relationship_id)
+            ->delete()) {
             return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
                 ->withHttpCode(ApiCode::HTTP_OK)
                 ->withMessage(__('message.common.delete.success'))

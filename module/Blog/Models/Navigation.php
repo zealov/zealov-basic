@@ -10,6 +10,7 @@ class Navigation extends Model
 
     use HasFactory;
     use SoftDeletes;
+
     public $table = 'navigations';
     protected $fillable = [
         'parent_id',
@@ -24,24 +25,25 @@ class Navigation extends Model
 
     public static function getList(array $validated)
     {
-        $parent_id = $validated['parent_id']??0;
+        $parent_id = $validated['parent_id'] ?? 0;
         $navigation = [];
         $model = self::select(['*']);
 
         $t = $model->orderBy('sort')->get()->toArray();
-        $label = $validated['label']??0;
-        if($label){
-            $parent_id = self::where('label',$label)->value('id');
+        $label = $validated['label'] ?? 0;
+        if ($label) {
+            $parent_id = self::where('label', $label)->value('id');
         }
-        if (!empty($t)){
-            $navigation = self::tree_page($t,'id', 'parent_id', 'children',$parent_id);
+        if (!empty($t)) {
+            $navigation = self::tree_page($t, 'id', 'parent_id', 'children', $parent_id);
         }
-        return ['navigation'=>$navigation];
+        return ['navigation' => $navigation];
     }
 
-    public function getNavigationByParentId($parent_id){
-        $data = self::orderBy('sort')->get()->toArray();
-        return self::tree_page($data,'id', 'parent_id', 'children',$parent_id);
+    public function getNavigationByParentId($parent_id)
+    {
+        $data = self::orderBy('sort')->where('published', 1)->get()->toArray();
+        return self::tree_page($data, 'id', 'parent_id', 'children', $parent_id);
     }
 
     public static function create(array $attributes)
@@ -55,12 +57,12 @@ class Navigation extends Model
         unset($attributes['id']);
 
         return [
-            'result' => $navigation->update($attributes),
+            'result'     => $navigation->update($attributes),
             'navigation' => $navigation
         ];
     }
 
-    public  static function tree_page($list = [], $pk = 'id', $pid = 'parent_id', $child = '_child', $root = 0)
+    public static function tree_page($list = [], $pk = 'id', $pid = 'parent_id', $child = '_child', $root = 0)
     {
         if (empty($list)) {
             return [];
@@ -90,14 +92,10 @@ class Navigation extends Model
     }
 
 
-    public function chunk(){
-        return $this->morphToMany(
-            Chunk::class,
-            'subject',
-            'relationship',
-            'subject_id',
-            'relationship_id')
-            ->where('relationship.relationship_type','Module\\Blog\\Models\\Chunk');
+    public function chunk()
+    {
+        return $this->hasMany(Chunk::class,'subject_id','id')
+            ->where('subject_type','Module\Blog\Models\Navigation');
     }
 
 }

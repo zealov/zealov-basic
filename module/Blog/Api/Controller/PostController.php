@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::where('id',$id)->with('categories')->first()->toArray();
+        $post = Post::where('id', $id)->with('categories')->first()->toArray();
         if (is_null($post)) {
             return ResponseBuilder::asError(ApiCode::HTTP_NOT_FOUND)
                 ->withHttpCode(ApiCode::HTTP_NOT_FOUND)
@@ -66,7 +66,7 @@ class PostController extends Controller
             ->build();
     }
 
-    public function update(UpdateRequest $request,$id)
+    public function update(UpdateRequest $request, $id)
     {
         $validated = $request->validated();
         $categories = $validated['categories'];

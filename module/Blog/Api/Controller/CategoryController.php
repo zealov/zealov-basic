@@ -20,7 +20,8 @@ use Zealov\Kernel\Response\ApiCode;
 
 class CategoryController extends Controller
 {
-    public function store(CreateRequest $request){
+    public function store(CreateRequest $request)
+    {
         $validated = $request->validated();
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
@@ -56,7 +57,8 @@ class CategoryController extends Controller
             ->build();
     }
 
-    public function update(UpdateRequest $request,$id){
+    public function update(UpdateRequest $request, $id)
+    {
         $validated = $request->validated();
         $resultData = Category::updateSave($validated);
         if ($resultData['result']) {
@@ -96,10 +98,11 @@ class CategoryController extends Controller
      * @param UpdateSortRequest $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateSort(UpdateSortRequest $request){
+    public function updateSort(UpdateSortRequest $request)
+    {
         $validated = $request->validated();
-        foreach($validated['sortData'] as $item){
-            Category::query()->where('id',$item['id'])->update(['sort'=>$item['sort']]);
+        foreach ($validated['sortData'] as $item) {
+            Category::query()->where('id', $item['id'])->update(['sort' => $item['sort']]);
         }
         return ResponseBuilder::asSuccess(ApiCode::HTTP_OK)
             ->withHttpCode(ApiCode::HTTP_OK)
