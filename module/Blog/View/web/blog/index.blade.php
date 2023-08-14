@@ -21,10 +21,53 @@
                     <div class="main">
                         <!-- banner -->
                         @include('module::Blog.View.web.blog.components.banner')
-                        @include('module::Blog.View.web.blog.components.topic')
+{{--                        @include('module::Blog.View.web.blog.components.topic')--}}
                         @include('module::Blog.View.web.blog.components.category-nav')
                     </div>
                     <div class="sidebar">
+                        <section class="sidebar-profile">
+                            <div class="profile-cover">
+                                <div class="img">
+                                    <img src="images/mine-cover.jpeg" alt="">
+                                </div>
+                            </div>
+                            <div class="profile-info">
+                                <div class="avatar-wrap">
+                                    <img src="./images/avatar.jpg" alt="">
+                                </div>
+                                <div class="name-box">
+                                    <div class="name">
+                                        AI心语
+                                    </div>
+{{--                                    <a href="user_center.php" class="edit-btn">--}}
+{{--                                        编辑--}}
+{{--                                    </a>--}}
+                                </div>
+                                <div class="tip">心之客栈网站编辑，精选心理学和情感内容</div>
+{{--                                <div class="profile-stats">--}}
+{{--                                    <div class="item">--}}
+{{--                                        <div class="num">360</div>--}}
+{{--                                        <div class="txt">文章</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="item">--}}
+{{--                                        <div class="num">3</div>--}}
+{{--                                        <div class="txt">评论</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="item">--}}
+{{--                                        <div class="num">1</div>--}}
+{{--                                        <div class="txt">粉丝</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="btn-box">--}}
+{{--                                    <div class="btn">--}}
+{{--                                        <i class="iconfont icon-plus"></i> 关注--}}
+{{--                                    </div>--}}
+{{--                                    <div class="btn">--}}
+{{--                                        <i class="iconfont icon-mail"></i> 私信--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                            </div>
+                        </section>
                         <section class="sidebar-panel">
                             <div class="sidebar-title">
                                 欢迎光临
@@ -35,12 +78,12 @@
                                 </p>
                             </div>
                         </section>
-                        <section class="sidebar-panel">
-                            <div class="sidebar-search">
-                                <input type="text" name="keyword" class="layui-input" placeholder="输入关键词搜索...">
-                                <button type="submit" class="form-submit"><i class="iconfont icon-search1"></i></button>
-                            </div>
-                        </section>
+{{--                        <section class="sidebar-panel">--}}
+{{--                            <div class="sidebar-search">--}}
+{{--                                <input type="text" name="keyword" class="layui-input" placeholder="输入关键词搜索...">--}}
+{{--                                <button type="submit" class="form-submit"><i class="iconfont icon-search1"></i></button>--}}
+{{--                            </div>--}}
+{{--                        </section>--}}
                         <section class="sidebar-panel">
                             <div class="sidebar-title">
                                 热门标签

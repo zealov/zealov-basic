@@ -109,7 +109,8 @@ class ChunkController extends Controller
                 ->where('subject_type', 'Module\Blog\Models\Chunk')
                 ->where('subject_id', $validated['chunk_id'])
                 ->where('relationship_type', $tableMap[$validated['relationship_type']]['model'])
-                ->pluck('relationship_id')->toArray();
+                ->pluck('relationship_id')
+                ->toArray();
         }
 
         $relationship_ids = explode(',', $validated['relationship_id']);

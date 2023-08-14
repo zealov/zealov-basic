@@ -1,20 +1,15 @@
 <div class="banner">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <a href="post_list.php" class="swiper-slide">
-                <div class="slide-inner" style="background-image: url(images/banner01.jpeg);">
+            @foreach(\ZealovBlog::relationship('index','轮播图') as $key=>$value)
+            <a href="{{$value['redirect']}}" class="swiper-slide">
+                <div class="slide-inner" style="background-image: url({{$value['path']}});">
                     <div class="title">
-                        生活感悟
+                        {{$value['name']}}
                     </div>
                 </div>
             </a>
-            <a href="post_list.php" class="swiper-slide">
-                <div class="slide-inner" style="background-image: url(images/banner02.jpeg);">
-                    <div class="title">
-                        心理问题
-                    </div>
-                </div>
-            </a>
+            @endforeach
         </div>
         <div class="swiper-pagination"></div>
     </div>
