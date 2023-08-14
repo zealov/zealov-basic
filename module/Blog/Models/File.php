@@ -27,11 +27,10 @@ class File extends Model
             ->get();
 
         return [
-            'data' => $posts,
+            'data'  => $posts,
             'total' => $total
         ];
     }
-
 
 
 }

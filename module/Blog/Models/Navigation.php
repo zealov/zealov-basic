@@ -94,8 +94,8 @@ class Navigation extends Model
 
     public function chunk()
     {
-        return $this->hasMany(Chunk::class,'subject_id','id')
-            ->where('subject_type','Module\Blog\Models\Navigation');
+        return $this->hasMany(Chunk::class, 'subject_id', 'id')
+            ->where('subject_type', 'Module\Blog\Models\Navigation');
     }
 
 }

@@ -9,24 +9,25 @@ class Category extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     public $table = 'categories';
-    protected $fillable = ['name', 'sort', 'parent_id',  'label', 'published', 'description', 'image_path'];
+    protected $fillable = ['name', 'sort', 'parent_id', 'label', 'published', 'description', 'image_path'];
 
     public static function getList(array $validated)
     {
-        $parent_id = $validated['parent_id']??0;
+        $parent_id = $validated['parent_id'] ?? 0;
         $categories = [];
         $model = self::select(['*']);
 
         $t = $model->orderBy('sort')->get()->toArray();
-        $label = $validated['label']??0;
-        if($label){
-            $parent_id = Category::where('label',$label)->value('id');
+        $label = $validated['label'] ?? 0;
+        if ($label) {
+            $parent_id = Category::where('label', $label)->value('id');
         }
-        if (!empty($t)){
-            $categories = self::tree_page($t,'id', 'parent_id', 'children',$parent_id);
+        if (!empty($t)) {
+            $categories = self::tree_page($t, 'id', 'parent_id', 'children', $parent_id);
         }
-        return ['category'=>$categories];
+        return ['category' => $categories];
     }
 
     /**
@@ -35,7 +36,8 @@ class Category extends Model
      * @param array $attributes
      * @return Builder|Model
      */
-    public static function create(array $attributes){
+    public static function create(array $attributes)
+    {
         return static::query()->create($attributes);
     }
 
@@ -45,7 +47,7 @@ class Category extends Model
         unset($attributes['id']);
 
         return [
-            'result' => $category->update($attributes),
+            'result'   => $category->update($attributes),
             'category' => $category
         ];
     }
@@ -82,7 +84,7 @@ class Category extends Model
         return $this->morphedByMany('App\Models\Post', 'relation_ship');
     }
 
-    public  static function tree_page($list = [], $pk = 'id', $pid = 'parent_id', $child = '_child', $root = 0)
+    public static function tree_page($list = [], $pk = 'id', $pid = 'parent_id', $child = '_child', $root = 0)
     {
         if (empty($list)) {
             return [];

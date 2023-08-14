@@ -10,18 +10,18 @@ class Config extends Model
     use HasFactory;
 
     public $table = 'system_config';
-    protected $fillable = ['name', 'key', 'value', 'type','group'];
+    protected $fillable = ['name', 'key', 'value', 'type', 'group'];
 
     public static function getList($group)
     {
 
         $model = self::select(['*']);
-        if($group){
-            $model = $model->where('group',$group);
+        if ($group) {
+            $model = $model->where('group', $group);
         }
         $config = $model->orderByDesc('created_at')->get()->toArray();
 
-        return ['config'=>$config];
+        return ['config' => $config];
     }
 
     public static function getGroup()
@@ -30,7 +30,7 @@ class Config extends Model
 
         $group = $model->groupBy('group')->get()->toArray();
 
-        return ['group'=>$group];
+        return ['group' => $group];
     }
 
     protected function serializeDate(\DateTimeInterface $date)

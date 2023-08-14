@@ -12,12 +12,13 @@ class Post extends Model
     use SoftDeletes;
 
     public $table = 'posts';
-    protected $fillable = ['name', 'sub_name', 'author', 'from', 'view', 'thumbnail', 'description','content', 'image_path', 'redirect', 'published', 'pinned', 'sort'];
+    protected $fillable = ['name', 'sub_name', 'author', 'from', 'view', 'thumbnail', 'description', 'content', 'image_path', 'redirect', 'published', 'pinned', 'sort'];
 
     protected static function newFactory()
     {
         return PostFactory::new();
     }
+
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -35,19 +36,20 @@ class Post extends Model
             ->get();
 
         return [
-            'data' => $posts,
+            'data'  => $posts,
             'total' => $total
         ];
     }
 
-    public function categories(){
+    public function categories()
+    {
         return $this->morphToMany(
             Category::class,
             'subject',
             'relationship',
             'subject_id',
             'relationship_id')
-            ->where('relationship.relationship_type','Module\\Blog\\Models\\Category');
+            ->where('relationship.relationship_type', 'Module\\Blog\\Models\\Category');
     }
 
 

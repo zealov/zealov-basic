@@ -12,12 +12,13 @@ class Page extends Model
     use SoftDeletes;
 
     public $table = 'pages';
-    protected $fillable = ['name', 'sub_name',  'view', 'thumbnail', 'description','content', 'image_path', 'redirect', 'published', 'sort'];
+    protected $fillable = ['name', 'sub_name', 'view', 'thumbnail', 'description', 'content', 'image_path', 'redirect', 'published', 'sort'];
 
     protected static function newFactory()
     {
         return PostFactory::new();
     }
+
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -35,7 +36,7 @@ class Page extends Model
             ->get();
 
         return [
-            'data' => $posts,
+            'data'  => $posts,
             'total' => $total
         ];
     }

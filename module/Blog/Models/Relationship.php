@@ -16,8 +16,9 @@ class Relationship extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function post(){
-        return $this->belongsToMany(Post::class,'id','subject_id');
+    public function post()
+    {
+        return $this->belongsToMany(Post::class, 'id', 'subject_id');
     }
 
 }

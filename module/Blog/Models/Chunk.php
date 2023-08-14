@@ -18,34 +18,38 @@ class Chunk extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
-    public function categories(){
+
+    public function categories()
+    {
         return $this->morphToMany(
             Category::class,
             'subject',
             'relationship',
             'subject_id',
             'relationship_id')
-            ->where('relationship.relationship_type','Module\\Blog\\Models\\Category');
+            ->where('relationship.relationship_type', 'Module\\Blog\\Models\\Category');
     }
 
-    public function pages(){
+    public function pages()
+    {
         return $this->morphToMany(
             Page::class,
             'subject',
             'relationship',
             'subject_id',
             'relationship_id')
-            ->where('relationship.relationship_type','Module\\Blog\\Models\\Page');
+            ->where('relationship.relationship_type', 'Module\\Blog\\Models\\Page');
     }
 
-    public function files(){
+    public function files()
+    {
         return $this->morphToMany(
             File::class,
             'subject',
             'relationship',
             'subject_id',
             'relationship_id')
-            ->where('relationship.relationship_type','Module\\Blog\\Models\\File');
+            ->where('relationship.relationship_type', 'Module\\Blog\\Models\\File');
     }
 
 }
