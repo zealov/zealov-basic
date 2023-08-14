@@ -15,7 +15,6 @@ class IndexController extends ZealovBaseController
 {
 
     public function index(){
-
         return $this->view('blog.index');
     }
 }

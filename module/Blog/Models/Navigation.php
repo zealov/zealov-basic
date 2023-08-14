@@ -39,6 +39,11 @@ class Navigation extends Model
         return ['navigation'=>$navigation];
     }
 
+    public function getNavigationByParentId($parent_id){
+        $data = self::orderBy('sort')->get()->toArray();
+        return self::tree_page($data,'id', 'parent_id', 'children',$parent_id);
+    }
+
     public static function create(array $attributes)
     {
         return static::query()->create($attributes);

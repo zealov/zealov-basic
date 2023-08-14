@@ -7,8 +7,7 @@
 {!! \Zealov\Zealov::css('asset/layui/css/layui.css') !!}
 {!! \Zealov\Zealov::css('asset/common/css/video-js.min.css') !!}
 {!! \Zealov\Zealov::css('asset/common/css/swiper-bundle.min.css') !!}
-
-<link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4118126_d2gmxlkcayu.css">
+{!! \Zealov\Zealov::css('asset/common/css/iconfont.css') !!}
 {!! \Zealov\Zealov::css('asset/common/css/animate.min.css') !!}
 {!! \Zealov\Zealov::css('asset/common/css/css.css') !!}
 {!! \Zealov\Zealov::css('asset/common/css/style.css') !!}

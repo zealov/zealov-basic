@@ -37,6 +37,7 @@ class ZealovServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/zealov.php', 'zealov');
         $this->loadAdminAuthConfig();
         $this->registerModuleMiddlewares();
+        $this->registerAppServiceProviders();
         $this->commands($this->commands);
         $this->app->singleton('SystemConfig', config('zealov.config.systemConfig'));
 
@@ -103,6 +104,25 @@ class ZealovServiceProvider extends ServiceProvider
                     $router->aliasMiddleware($module . '.' . $key, $middleware);
                 }
                 $router->middleware($module . '.' . $key, $middleware);
+            }
+        }
+    }
+
+    public function registerAppServiceProviders(){
+
+        $providers = [];
+        $modules = self::moduleScandir();
+
+        foreach($modules as $module){
+            $provider = "\\Module\\$module\\Providers\\AppServiceProvider";
+            if (class_exists($provider)) {
+                $providers[] = $provider;
+            }
+        }
+
+        foreach ($providers as $provider) {
+            if (class_exists($provider)) {
+                $this->app->register($provider);
             }
         }
     }

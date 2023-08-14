@@ -8,16 +8,6 @@
                             导航一
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            导航二
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            导航三
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

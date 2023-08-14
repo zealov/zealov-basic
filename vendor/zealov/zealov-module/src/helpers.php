@@ -11,3 +11,14 @@ if (!function_exists('starts_with')) {
         return false;
     }
 }
+if (!function_exists('ends_with')) {
+    function ends_with($haystack, $needles)
+    {
+        foreach ((array)$needles as $needle) {
+            if ((string)$needle === mb_substr($haystack, -mb_strlen($needle))) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
