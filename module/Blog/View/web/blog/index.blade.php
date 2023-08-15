@@ -17,29 +17,12 @@
         <div class="layui-container">
             <div class="flex">
                 <div class="main">
-                    <!-- banner -->
                     @include('module::Blog.View.web.blog.components.banner')
                     @include('module::Blog.View.web.blog.components.category-nav')
                 </div>
                 <div class="sidebar">
-                    <section class="sidebar-profile">
-                        <div class="profile-cover">
-                            <div class="img">
-                                <img src="images/mine-cover.jpeg" alt="">
-                            </div>
-                        </div>
-                        <div class="profile-info">
-                            <div class="avatar-wrap">
-                                <img src="./images/avatar.jpg" alt="">
-                            </div>
-                            <div class="name-box">
-                                <div class="name">
-                                    AI心语
-                                </div>
-                            </div>
-                            <div class="tip">心之客栈网站编辑，精选心理学和情感内容</div>
-                        </div>
-                    </section>
+                    @include('module::Blog.View.web.blog.components.profile',['title'=>'情感问题','data'=> \ZealovBlog::relationship('index','情感问题',1,10)])
+                    <div class="margin-top-20"></div>
                     @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'情感问题','data'=> \ZealovBlog::relationship('index','情感问题',1,10)])
                     @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'人际关系','data'=> \ZealovBlog::relationship('index','人际关系',1,10)])
                     @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'旅行日记','data'=> \ZealovBlog::relationship('index','旅行日记',1,10)])

@@ -1,7 +1,7 @@
 @extends($_viewFrame)
 
 @section('title')
-    {{app('SystemConfig')->value('siteName')}}
+    {{\ZealovBlog::page('/'.request()->path(),'name')}}-{{app('SystemConfig')->value('siteName')}}
 @endsection
 @section('keywords')
     {{app('SystemConfig')->value('siteKeywords')}}

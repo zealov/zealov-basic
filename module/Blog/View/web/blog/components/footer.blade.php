@@ -2,51 +2,6 @@
 <footer>
     <div class="footer-top">
         <div class="layui-container">
-            <ul class="footer-nav">
-                <li>
-                    <a href="./">首页</a>
-                </li>
-                <li>
-                    <a href="#">内容标签</a>
-                </li>
-                <li>
-                    <a href="#">心理知识</a>
-                </li>
-                <li>
-                    <a href="#">心理问题</a>
-                </li>
-                <li>
-                    <a href="#">心理测试</a>
-                </li>
-                <li>
-                    <a href="#">人际关系</a>
-                </li>
-                <li>
-                    <a href="./">首页</a>
-                </li>
-                <li>
-                    <a href="#">内容标签</a>
-                </li>
-                <li>
-                    <a href="#">心理知识</a>
-                </li>
-                <li>
-                    <a href="#">心理问题</a>
-                </li>
-                <li>
-                    <a href="#">心理测试</a>
-                </li>
-                <li>
-                    <a href="#">人际关系</a>
-                </li>
-                <li>
-                    <a href="./">首页</a>
-                </li>
-                <li>
-                    <a href="#">内容标签</a>
-                </li>
-
-            </ul>
             <div class="copyright">
                 ©&nbsp;2020 <a href="https://adhpo.com">心之客栈</a> 版权所有 <a href="" target="_blank">鲁ICP备18056135号-2</a>
             </div>

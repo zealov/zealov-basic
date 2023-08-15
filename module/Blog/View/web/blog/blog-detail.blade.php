@@ -92,11 +92,6 @@
         </div>
     </div>
     @include('module::Blog.View.web.blog.components.footer')
-    <script>
-        $(function () {
-            $('.header-nav .layui-nav li').eq(2).addClass('active').siblings().removeClass('active');
-        })
-    </script>
     </body>
 @endsection
 

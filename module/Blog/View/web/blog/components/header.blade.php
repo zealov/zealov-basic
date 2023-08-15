@@ -15,7 +15,7 @@
                                     <div class="close-btn"><i class="iconfont icon-close"></i></div>
                                 </li>
                                 @foreach(\ZealovBlog::navigation() as $key=>$value)
-                                    <li class="layui-nav-item">
+                                    <li class="layui-nav-item @if(request()->path()==trim($value['url'],'/') || request()->path()==$value['url']) active @endif">
                                         <a href="{{$value['url']}}">{{$value['name']}}</a>
                                         @if(isset($value['children']))
                                             <dl class="layui-nav-child">
