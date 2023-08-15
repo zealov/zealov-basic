@@ -7,6 +7,7 @@ use Module\Blog\Models\Model;
 use Module\Blog\Models\Navigation;
 use Module\Blog\Models\Post;
 use Module\Blog\Models\Relationship;
+use Zealov\Models\SystemConfig;
 
 class ZealovBlog
 {
@@ -164,6 +165,10 @@ class ZealovBlog
                 ->toArray();
         }
         return $data;
+    }
+
+    public static function systemConfig($key){
+        return SystemConfig::where('key',$key)->value('value');
     }
 
 }

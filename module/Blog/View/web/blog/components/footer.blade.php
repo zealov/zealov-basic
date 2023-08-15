@@ -1,9 +1,8 @@
-
 <footer>
     <div class="footer-top">
         <div class="layui-container">
             <div class="copyright">
-                ©&nbsp;2020 <a href="https://adhpo.com">心之客栈</a> 版权所有 <a href="" target="_blank">鲁ICP备18056135号-2</a>
+                版权所有©  {{\ZealovBlog::systemConfig('blogName')}}&nbsp;&nbsp;<a href="{{\ZealovBlog::systemConfig('siteBeianGonganLink')}}" target="_blank">  {{\ZealovBlog::systemConfig('siteBeian')}}</a>
             </div>
         </div>
     </div>

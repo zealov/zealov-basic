@@ -10,9 +10,9 @@
         </div>
         <div class="name-box">
             <div class="name">
-                AI心语
+                {{\ZealovBlog::systemConfig('blogName')}}
             </div>
         </div>
-        <div class="tip">心之客栈网站编辑，精选心理学和情感内容</div>
+        <div class="tip text-center">{{\ZealovBlog::systemConfig('BlogSlogan')}}</div>
     </div>
 </section>
