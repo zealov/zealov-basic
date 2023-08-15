@@ -14,8 +14,8 @@
     </div>
     <div class="tab-wrap">
         <div class="post-list">
-            @foreach(\ZealovBlog::post(1,15) as $key=>$value)
-            <a href="{{$value['redirect']}}" class="item">
+            @foreach(\ZealovBlog::post(1,10) as $key=>$value)
+            <a href="{{$value['redirect']?$value['redirect']:'/blog/'.$value['id']}}" class="item">
                 <div class="left">
                     <div class="img-box">
                         <div class="img">
@@ -35,14 +35,13 @@
                     </div>
                 </div>
                 <object>
-                    <a href="#" class="item-category">亲子关系</a>
+                    @foreach($value['categories'] as $k=>$v)
+                    <a href="#" class="item-category">{{$v['name']}}</a>
+                    @endforeach
                 </object>
             </a>
             @endforeach
         </div>
-{{--        <div class="button">--}}
-{{--            <a href="javascript:;">点击查看更多</a>--}}
-{{--        </div>--}}
     </div>
 
 </section>

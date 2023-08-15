@@ -11,7 +11,7 @@ class Chunk extends Model
     use SoftDeletes;
 
     public $table = 'chunks';
-    protected $fillable = ['name', 'type', 'sort'];
+    protected $fillable = ['name', 'type', 'sort','subject_type','subject_id'];
 
 
     protected function serializeDate(\DateTimeInterface $date)

@@ -1474,6 +1474,12 @@ footer .copyright a{
     font-size: 24px;
     line-height: 1.4;
 }
+.page-container .article-title .text-center{
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 1.4;
+    text-align: center;
+}
 .page-container .article-title .article-info{
     display: flex;
     align-items: center;

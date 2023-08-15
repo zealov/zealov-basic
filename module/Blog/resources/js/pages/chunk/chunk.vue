@@ -253,6 +253,7 @@ export default {
                 });
                 this.createChunkDialog = false
                 this.getChunk()
+                this.changeChunk()
             })
         },
         getChunk(){
