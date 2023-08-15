@@ -1,5 +1,4 @@
 @extends($_viewFrame)
-
 @section('title')
     {{\ZealovBlog::postDetail(Request::route('id'),'name')}}-{{app('SystemConfig')->value('siteName')}}
 @endsection
@@ -78,9 +77,7 @@
                                         </a>
                                     @endif
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <div class="sidebar">

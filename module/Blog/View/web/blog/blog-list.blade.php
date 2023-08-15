@@ -56,6 +56,7 @@
                     </div>
                     <div class="sidebar">
                         @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'随机内容','data'=> \ZealovBlog::inRandomOrder(10,request('category'))])
+                        @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'最新文章','data'=> \ZealovBlog::post(1,5)])
                     </div>
                 </div>
             </div>
