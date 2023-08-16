@@ -49,6 +49,7 @@ $(document).ready(function(){
     }
 });
 $(function() {
+
     change();
     function change() {
         var pmWidth = document.documentElement.clientWidth;
@@ -78,15 +79,25 @@ $(function() {
             layer = layui.layer,
             laypage = layui.laypage,
             form = layui.form;
-
         // 分页
         laypage.render({
             elem: 'pages'
             ,count: 100
             ,theme: '#6997bf'
+            ,curr:currPage()
             ,prev: '<i class="iconfont icon-left"></i>'
             ,next: '<i class="iconfont icon-right"></i>'
-            ,groups:3
+            ,groups:6
+            ,jump:function(obj, first){
+                //obj包含了当前分页的所有参数，比如：
+                if(!first){
+                    //do something
+                    var params = window.location.search
+                    var paramsObj = queryURLParams(params)
+                    paramsObj.page = obj.curr
+                    window.location =window.location.protocol+'//'+window.location.host+ window.location.pathname+jsonUrl(paramsObj)
+                }
+            }
         });
 
         $('.header .menu-toggle').click(function(){
@@ -99,8 +110,33 @@ $(function() {
         $('.mobile-bg').click(function(){
             $('body').removeClass('mobile-site').removeClass('body-hidden');
         })
-
-
+        function queryURLParams(url) {
+            var searchParams = new URLSearchParams(url)
+            var paramsObj = {};
+            for (let p of searchParams) {
+                paramsObj[p[0]] = p[1];
+            }
+            return paramsObj
+        }
+        function currPage(){
+            var url = window.location.search
+            var searchParams = new URLSearchParams(url)
+            var paramsObj = {};
+            for (let p of searchParams) {
+                paramsObj[p[0]] = p[1];
+            }
+            if(paramsObj.page ==undefined){
+                return 1;
+            }
+            return paramsObj.page
+        }
+        function jsonUrl(e){
+            let url = '?'
+            for (let i in e) {
+                url+=(i+'='+e[i]+'&')
+            }
+            return url.slice(0,url.length-1)
+        }
         function mobileMenu(){
             $('.header-nav .layui-nav .layui-nav-item .layui-nav-more').click(function(e){
                 $(this).parents('a').next().addClass("layui-show");
