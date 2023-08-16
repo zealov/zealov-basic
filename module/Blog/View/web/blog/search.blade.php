@@ -19,16 +19,16 @@
                 <div class="breadcrumb">
                     <span class="layui-breadcrumb">
                         <a href="/"> 首页</a>
-                        <a class="last" href="/blog?category={{\ZealovBlog::categoryName(request('category'))}}"><cite>{{\ZealovBlog::categoryName(request('category'))}}</cite></a>
+                        <a class="last"><cite>搜索：{{request('keyword')}}</cite></a>
                     </span>
                 </div>
                 <div class="flex">
                     <div class="main">
                         <section class="card-panel no-pad">
-                            <div class="panel-list-title"><h1>{{\ZealovBlog::categoryName(request('category'))}}</h1>
+                            <div class="panel-list-title"><h1>搜索：{{request('keyword')}}</h1>
                             </div>
                             <div class="post-list">
-                                @foreach(\ZealovBlog::post(request('page'),10,request('category')) as $key=>$value)
+                                @foreach(\ZealovBlog::post(request('page'),10,'',request('keyword')) as $key=>$value)
                                     <a href="{{$value['redirect']?$value['redirect']:'/blog/'.$value['id']}}" class="item">
                                         <div class="left">
                                             <div class="img-box">
@@ -54,10 +54,6 @@
                             <div class="pages" id="pages"></div>
                         </section>
                     </div>
-                    <div class="sidebar">
-                        @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'随机内容','data'=> \ZealovBlog::inRandomOrder(10,request('category'))])
-                        @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'最新文章','data'=> \ZealovBlog::post(1,10)])
-                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +62,7 @@
     </body>
     @section('scripts')
         <script>
-            var total = '{{ \ZealovBlog::postTotal(request('category')) }}';
+            var total = '{{ \ZealovBlog::postTotal('',request('keyword')) }}';
         </script>
     @stop
 @endsection

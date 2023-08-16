@@ -34,7 +34,7 @@
 
                         </div>
                         <div class="search-box">
-                            <input type="text" name="keyword" class="layui-input" placeholder="输入关键词搜索...">
+                            <input type="text" name="keyword" id="keyword" class="layui-input" placeholder="输入关键词搜索...">
                             <button type="submit" class="form-submit"><i class="iconfont icon-search1"></i></button>
                             <span class="close-btn">
                                 <i class="iconfont icon-close"></i>

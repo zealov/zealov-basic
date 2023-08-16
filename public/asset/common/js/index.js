@@ -1,3 +1,19 @@
+function isExitsVariable(variableName) {
+    try {
+        if (typeof(eval(variableName)) == "undefined") {
+            return false;
+        } else {
+            return true;
+        }
+    } catch(e) {
+
+    }
+    return false;
+}
+if(!isExitsVariable('total')){
+    var total = 0;
+}
+console.log(total)
 $(document).ready(function(){
     var window_w = $(window).width(); // Window Width
     var window_h = $(window).height(); // Window Height
@@ -70,7 +86,7 @@ $(function() {
     });
     $(".search-box input").keypress(function (e) {
         if (e.which == 13) {
-            window.location.href = "search.php"
+            window.location.href = "/search?keyword="+$("#keyword").val()
         }
     });
     layui.use(['element', 'form', 'layer', 'laypage'], function() {
@@ -82,13 +98,14 @@ $(function() {
         // 分页
         laypage.render({
             elem: 'pages'
-            ,count: 100
+            ,count: total
             ,theme: '#6997bf'
             ,curr:currPage()
             ,prev: '<i class="iconfont icon-left"></i>'
             ,next: '<i class="iconfont icon-right"></i>'
             ,groups:6
             ,jump:function(obj, first){
+
                 //obj包含了当前分页的所有参数，比如：
                 if(!first){
                     //do something

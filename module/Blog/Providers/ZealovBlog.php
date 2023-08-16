@@ -18,7 +18,7 @@ class ZealovBlog
         return Navigation::getNavigationByParentId($parent_id);
     }
 
-    public static function post($offset = 1, $limit = 15, $categoryName = '')
+    public static function post($offset = 1, $limit = 15, $categoryName = '',$keyword='')
     {
         $model = Post::query()->where('published', 1);
         if ($categoryName) {
@@ -27,6 +27,9 @@ class ZealovBlog
                 $q->where('relationship_id', $categoryId);
             });
         } else {
+            $model->when($keyword??null,function($q)use($keyword){
+                $q->where('name','like','%'.$keyword.'%');
+            });
             $model->with('categories');
         }
         return $model->orderByDesc('created_at')
@@ -34,6 +37,23 @@ class ZealovBlog
             ->take($limit)
             ->get()
             ->toArray();
+    }
+
+    public static function postTotal($categoryName = '',$keyword='')
+    {
+        $model = Post::query()->where('published', 1);
+        if ($categoryName) {
+            $categoryId = Category::where('name', $categoryName)->value('id');
+            $model->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('relationship_id', $categoryId);
+            });
+        } else {
+            $model->when($keyword??null,function($q)use($keyword){
+                $q->where('name','like','%'.$keyword.'%');
+            });
+            $model->with('categories');
+        }
+        return $model->count();
     }
 
     public static function postDetail($id,$field)

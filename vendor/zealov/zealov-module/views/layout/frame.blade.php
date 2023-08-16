@@ -17,5 +17,6 @@
     {!! \Zealov\Zealov::js() !!}
     {!! \Zealov\Zealov::script() !!}
     @section('appendBody')@show
+    @yield('scripts')
 </body>
 </html>

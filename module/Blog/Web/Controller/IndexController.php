@@ -29,4 +29,8 @@ class IndexController extends ZealovBaseController
     public function page(){
         return $this->view('blog.page');
     }
+
+    public function search(){
+        return $this->view('blog.search');
+    }
 }
