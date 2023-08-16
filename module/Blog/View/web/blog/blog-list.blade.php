@@ -30,13 +30,15 @@
                             <div class="post-list">
                                 @foreach(\ZealovBlog::post(request('page'),10,request('category')) as $key=>$value)
                                     <a href="{{$value['redirect']?$value['redirect']:'/blog/'.$value['id']}}" class="item">
-                                        <div class="left">
-                                            <div class="img-box">
-                                                <div class="img">
-                                                    <img src="{{$value['thumbnail']}}" alt="">
+                                        @if($value['thumbnail'])
+                                            <div class="left">
+                                                <div class="img-box">
+                                                    <div class="img">
+                                                        <img src="{{$value['thumbnail']}}" alt="">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                         <div class="content">
                                             <div class="title">
                                                 {{$value['name']}}
