@@ -42,7 +42,7 @@
 
                                 <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
                                     @if(\ZealovBlog::postDetailPrev(Request::route('id'),'id'))
-                                        <a class="page-item" style="background-image: url(/images/page-demo1.jpeg);"
+                                        <a class="page-item" style="background-color: #409EFF"
                                            href="{{\ZealovBlog::postDetailPrev(Request::route('id'),'redirect')?\ZealovBlog::postDetailPrev(Request::route('id'),'redirect'):'/blog/'.\ZealovBlog::postDetailPrev(Request::route('id'),'id')}}">
                                             <div class="title">
                                                 {{\ZealovBlog::postDetailPrev(Request::route('id'),'name')}}
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
                                     @if(\ZealovBlog::postDetailNext(Request::route('id'),'id'))
-                                        <a class="page-item" style="background-image: url(/images/page-img.jpeg);"
+                                        <a class="page-item" style="background-color: #55E05C"
                                            href="{{\ZealovBlog::postDetailNext(Request::route('id'),'redirect')?\ZealovBlog::postDetailNext(Request::route('id'),'redirect'):'/blog/'.\ZealovBlog::postDetailNext(Request::route('id'),'id')}}">
                                             <div class="title">
                                                 {{\ZealovBlog::postDetailNext(Request::route('id'),'name')}}
