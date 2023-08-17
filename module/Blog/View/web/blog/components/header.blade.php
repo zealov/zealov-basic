@@ -5,7 +5,7 @@
             <div class="layui-container">
                 <div class="flex">
                     <div class="logo">
-                        <a href="/" class="logo-black"><img src="/images/logo.png" alt=""></a>
+                        <a href="/" class="logo-black"><img src="{{\ZealovBlog::systemConfig('siteLogo')}}" alt=""></a>
                     </div>
                     <div class="header-main">
                         <div class="header-nav">

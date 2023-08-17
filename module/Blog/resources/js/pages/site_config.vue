@@ -185,6 +185,29 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item
+                    label="文件"
+                    class="upload_thumb"
+                    prop="value"
+                    v-if="createSiteConfigForm.type=='file'"
+                >
+                    <el-upload
+                        class="uploadThumbImg"
+                        :headers="headers"
+                        :action="action"
+                        :show-file-list="false"
+                        :on-success="successUpload"
+                        :before-upload="beforeUpload"
+                        :data="uploadData"
+                    >
+                        <img
+                            v-if="createSiteConfigForm.value"
+                            :src="imageUrlPreview"
+                            class="thumb"
+                        />
+                        <i v-else class="el-icon-plus"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item
                     prop="value"
                     label="值"
                     :error="createError.value ? createError.value[0] : ''"
@@ -276,6 +299,29 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item
+                    label="文件"
+                    class="upload_thumb"
+                    prop="value"
+                    v-if="updateSiteConfigForm.type=='file'"
+                >
+                    <el-upload
+                        class="uploadThumbImg"
+                        :headers="headers"
+                        :action="action"
+                        :show-file-list="false"
+                        :on-success="successUploadEdit"
+                        :before-upload="beforeUploadEdit"
+                        :data="uploadData"
+                    >
+                        <img
+                            v-if="updateSiteConfigForm.value"
+                            :src="editImageUrlPreview"
+                            class="thumb"
+                        />
+                        <i v-else class="el-icon-plus"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item
                     prop="value"
                     label="值"
                     :error="updateError.value ? updateError.value[0] : ''"
@@ -303,7 +349,8 @@
 
 <script>
 import {store, index, show, update, group} from '../api/config'
-
+import {getBaseApi, getBaseHost} from "@/utils/index";
+import { getToken } from "@/utils/auth";
 export default {
     data() {
         return {
@@ -320,10 +367,19 @@ export default {
             filter: {
                 keywords: "",
             },
+            uploadData: {},
+            headers: {},
+            imageUrlPreview: "",
+            editImageUrlPreview:"",
+            action: "",
             typeArr: [
                 {
                     value: "string",
                     label: "字符串",
+                },
+                {
+                    value: "file",
+                    label: "文件",
                 }
             ],
             createSiteConfigForm: {
@@ -347,8 +403,38 @@ export default {
     created() {
         this.getSiteConfig()
         this.getSiteConfigGroup()
+        this.setAction();
+        this.setHeader()
     },
     methods: {
+        setAction() {
+            this.action = getBaseApi() + "/blog/file/upload";
+        },
+        setHeader() {
+            this.headers = {
+                Authorization: "Bearer " + getToken(),
+            };
+        },
+        // 上传成功
+        successUpload(response, file, fileList) {
+            this.imageUrlPreview = getBaseHost() + response.data.path;
+            this.createSiteConfigForm.value = response.data.path;
+        },
+        beforeUpload(file) {
+            const directory = "/system_file";
+            this.uploadData.directory = directory;
+            this.uploadData.name = file.name;
+        },
+        // 上传成功
+        successUploadEdit(response, file, fileList) {
+            this.editImageUrlPreview = getBaseHost() + response.data.path;
+            this.updateSiteConfigForm.value = response.data.path;
+        },
+        beforeUploadEdit(file) {
+            const directory = "/system_file";
+            this.uploadData.directory = directory;
+            this.uploadData.name = file.name;
+        },
         handleEdit(item) {
             show(item.id).then((response) => {
                 this.updateSiteConfigForm.id = response.data.id
@@ -358,6 +444,9 @@ export default {
                 this.updateSiteConfigForm.type = response.data.type
                 this.updateSiteConfigForm.group = response.data.group
                 this.updateSiteConfigVisible = true;
+                if(response.data.type=='file'){
+                    this.editImageUrlPreview = getBaseHost() + response.data.value;
+                }
             })
         },
         selectGroup(item) {
