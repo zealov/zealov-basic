@@ -1,20 +1,8 @@
-<section class="card-panel no-pad" >
-    <div class="category-nav">
-        <div class="category-swiper">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide active">
-                        <div class="item">
-                            最新文章
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="card-panel no-pad">
+    <div class="panel-list-title"><h1>{{$title}}</h1>
     </div>
-    <div class="tab-wrap">
-        <div class="post-list">
-            @foreach(\ZealovBlog::post(1,10) as $key=>$value)
+    <div class="post-list">
+        @foreach($data as $key=>$value)
             <a href="{{$value['redirect']?$value['redirect']:'/blog/'.$value['id']}}" class="item">
                 @if($value['thumbnail'])
                     <div class="left">
@@ -37,8 +25,7 @@
                     </div>
                 </div>
             </a>
-            @endforeach
-        </div>
+        @endforeach
     </div>
-
+    <div class="pages" id="pages"></div>
 </section>

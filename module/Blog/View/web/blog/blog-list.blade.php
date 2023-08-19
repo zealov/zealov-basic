@@ -24,37 +24,7 @@
                 </div>
                 <div class="flex">
                     <div class="main">
-                        <section class="card-panel no-pad">
-                            <div class="panel-list-title"><h1>{{\ZealovBlog::categoryName(request('category'))}}</h1>
-                            </div>
-                            <div class="post-list">
-                                @foreach(\ZealovBlog::post(request('page'),10,request('category')) as $key=>$value)
-                                    <a href="{{$value['redirect']?$value['redirect']:'/blog/'.$value['id']}}" class="item">
-                                        @if($value['thumbnail'])
-                                            <div class="left">
-                                                <div class="img-box">
-                                                    <div class="img">
-                                                        <img src="{{$value['thumbnail']}}" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                        <div class="content">
-                                            <div class="title">
-                                                {{$value['name']}}
-                                            </div>
-                                            <div class="desc">
-                                                {!! $value['description'] !!}
-                                            </div>
-                                            <div class="time">
-                                                {{$value['created_at']}}
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            </div>
-                            <div class="pages" id="pages"></div>
-                        </section>
+                        @include('module::Blog.View.web.blog.components.list',['title'=>\ZealovBlog::categoryName(request('category')),'data'=> \ZealovBlog::post(request('page'),10,request('category'))])
                     </div>
                     <div class="sidebar">
                         @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'随机内容','data'=> \ZealovBlog::inRandomOrder(10,request('category'))])

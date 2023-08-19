@@ -68,7 +68,7 @@ class ZealovBlog
 
     public static function postDetailPrev($id,$field)
     {
-        return  Post::query()->where('published', 1)->where('id','<',$id)->value($field);
+        return  Post::query()->where('published', 1)->where('id','<',$id)->orderByDesc('id')->value($field);
     }
 
     public static function inRandomOrder($limit, $categoryName = '')
