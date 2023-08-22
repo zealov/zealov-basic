@@ -191,4 +191,11 @@ class ZealovBlog
         return SystemConfig::where('key',$key)->value('value');
     }
 
+    public static function navigationChunk($label,$type=['posts']){
+        $data = Navigation::where('label',$label)->with(['chunk'=>function($q)use($type){
+            $q->whereIn('type',$type)->orderBy('sort');
+        }])->first()->toArray();
+        return $data['chunk']??[];
+    }
+
 }

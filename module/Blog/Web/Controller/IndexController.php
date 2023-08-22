@@ -15,6 +15,7 @@ class IndexController extends ZealovBaseController
 {
 
     public function index(){
+        $a = \ZealovBlog::navigationChunk('index');
         return $this->view('blog.index');
     }
 

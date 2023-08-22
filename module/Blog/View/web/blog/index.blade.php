@@ -21,11 +21,11 @@
                     @include('module::Blog.View.web.blog.components.category-nav')
                 </div>
                 <div class="sidebar">
-                    @include('module::Blog.View.web.blog.components.profile',['title'=>'情感问题','data'=> \ZealovBlog::relationship('index','情感问题',1,10)])
+                    @include('module::Blog.View.web.blog.components.profile')
                     <div class="margin-top-20"></div>
-                    @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'情感问题','data'=> \ZealovBlog::relationship('index','情感问题',1,10)])
-                    @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'人际关系','data'=> \ZealovBlog::relationship('index','人际关系',1,10)])
-                    @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>'旅行日记','data'=> \ZealovBlog::relationship('index','旅行日记',1,10)])
+                    @foreach(\ZealovBlog::navigationChunk('index') as $key=>$value)
+                        @include('module::Blog.View.web.blog.components.sidebar-panel',['title'=>$value['name'],'data'=> \ZealovBlog::relationship('index',$value['name'],1,10)])
+                    @endforeach
                 </div>
             </div>
         </div>
