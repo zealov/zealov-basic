@@ -5,12 +5,12 @@ return [
         "label"     => "blog",
         "path"      => "/admin/blog/navigation",
         "component" => "basic",
-        "name"      => "blog.navigation",
+        "name"      => "blog.navigation.index",
         "hidden"    => false,
-        "redirect"  => "noRedirect",
+        "redirect"  => "",
         "meta"      => [
-            "title" => "物料管理",
-            "icon"  => "el-icon-files",
+            "title" => "导航菜单",
+            "icon"  => "el-icon-position",
             "roles" => [
                 'admin'
             ],
@@ -30,9 +30,6 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
             ],
             [
                 "label"     => "blog",
@@ -48,10 +45,24 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
             ],
+        ],
+    ],
+    [
+        "label"     => "blog",
+        "path"      => "/admin/blog/category",
+        "component" => "basic",
+        "name"      => "blog.category.index",
+        "hidden"    => false,
+        "redirect"  => "noRedirect",
+        "meta"      => [
+            "title" => "分类管理",
+            "icon"  => "el-icon-files",
+            "roles" => [
+                'admin'
+            ],
+        ],
+        "children"  => [
             [
                 "label"     => "blog",
                 "path"      => "/admin/blog/category",
@@ -66,10 +77,24 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
+            ]
+        ],
+    ],
+    [
+        "label"     => "blog",
+        "path"      => "/admin/blog/file",
+        "component" => "basic",
+        "name"      => "blog.file",
+        "hidden"    => false,
+        "redirect"  => "noRedirect",
+        "meta"      => [
+            "title" => "文件管理",
+            "icon"  => "el-icon-folder-opened",
+            "roles" => [
+                'admin'
             ],
+        ],
+        "children"  => [
             [
                 "label"     => "blog",
                 "path"      => "/admin/blog/file",
@@ -83,9 +108,6 @@ return [
                     "roles" => [
                         'admin'
                     ],
-                ],
-                "children"  => [
-
                 ],
             ]
         ],
@@ -114,14 +136,11 @@ return [
                 "hidden"    => false,
                 "redirect"  => "",
                 "meta"      => [
-                    "title" => "文章列表",
+                    "title" => "博客管理",
                     "icon"  => "el-icon-postcard",
                     "roles" => [
                         'admin'
                     ],
-                ],
-                "children"  => [
-
                 ],
             ],
             [
@@ -138,9 +157,6 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
             ],
             [
                 "label"     => "blog",
@@ -156,10 +172,24 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
             ],
+        ],
+    ],
+    [
+        "label"     => "blog",
+        "path"      => "/admin/blog",
+        "component" => "basic",
+        "name"      => "blog.post",
+        "hidden"    => false,
+        "redirect"  => "noRedirect",
+        "meta"      => [
+            "title" => "页面管理",
+            "icon"  => "el-icon-files",
+            "roles" => [
+                'admin'
+            ],
+        ],
+        "children"  => [
             [
                 "label"     => "blog",
                 "path"      => "/admin/blog/page",
@@ -168,14 +198,11 @@ return [
                 "hidden"    => false,
                 "redirect"  => "",
                 "meta"      => [
-                    "title" => "页面列表",
+                    "title" => "页面管理",
                     "icon"  => "el-icon-notebook-2",
                     "roles" => [
                         'admin'
                     ],
-                ],
-                "children"  => [
-
                 ],
             ],
             [
@@ -192,9 +219,6 @@ return [
                         'admin'
                     ],
                 ],
-                "children"  => [
-
-                ],
             ],
             [
                 "label"     => "blog",
@@ -209,9 +233,6 @@ return [
                     "roles" => [
                         'admin'
                     ],
-                ],
-                "children"  => [
-
                 ],
             ],
         ],
