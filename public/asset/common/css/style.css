@@ -1189,6 +1189,7 @@ footer .copyright a{
 
 }
 .post-list .content .title{
+    font-weight: 550;
     font-size: 20px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -1213,7 +1214,7 @@ footer .copyright a{
 .post-list .content .time{
     /* position: absolute; */
     /* bottom: 0px; */
-    margin-top: 5px;
+    margin-bottom: 5px;
     width: 100%;
     color: var(--color-text-secondary-grey);
     font-size: 12px;
