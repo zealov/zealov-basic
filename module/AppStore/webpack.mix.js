@@ -20,7 +20,7 @@ mix.webpackConfig({
         path:resolve(__dirname,output(__dirname)),
     },
     externals: {
-        // 'vue': 'Vue',
+        'vue': 'Vue',
         // 'element-ui': 'ELEMENT',
         'jquery': 'window.$',
         //'echarts': 'echarts',

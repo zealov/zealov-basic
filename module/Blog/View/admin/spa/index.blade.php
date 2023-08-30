@@ -26,6 +26,7 @@
 <script>
     window.config = @json($config);
 </script>
+
 <script src="{{ (str_starts_with($appJs, '//') ? 'http:' : '').$appJs }}"></script>
 </body>
 </html>

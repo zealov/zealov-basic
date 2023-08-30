@@ -19,6 +19,7 @@
         "bootstrap": "^5.1.0",
         "echarts": "^5.0.2",
         "element-ui": "^2.15.1",
+        "iframe-resizer": "^4.3.6",
         "js-cookie": "^2.2.1",
         "node-polyfill-webpack-plugin": "^2.0.1",
         "nprogress": "^0.2.0",

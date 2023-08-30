@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -21,7 +20,7 @@
 </head>
 <body>
 <div id="app"></div>
-{{--<script src="{{asset('asset/vendor/vue.js')}}"></script>--}}
+<script src="{{asset('asset/vendor/vue.js')}}"></script>
 {{--<script src="{{asset('asset/vendor/element-ui/index.js')}}"></script>--}}
 <script>
     window.config = @json($config);

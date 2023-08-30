@@ -94,7 +94,7 @@ async function beforeEach(to, from, next) {
                 } catch (error) {
                     console.log(error)
                     // Message.error(error || 'Has Error')
-                    next(`/admin/login?redirect=${to.path}`)
+                    next(`/admin/login`)
                 }
             } else {
                 next()
@@ -107,7 +107,8 @@ async function beforeEach(to, from, next) {
             next()
         } else {
             // other pages that do not have permission to access are redirected to the login page.
-            next(`/admin/login?redirect=${to.path}`)
+            // next(`/admin/login?redirect=${to.path}`)
+            next(`/admin/login`)
             NProgress.done()
         }
     }

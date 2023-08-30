@@ -1,6 +1,7 @@
 import {constantRoutes} from '~/router'
 import store from '~/store'
 import Basic from '../../layouts/basic'
+import Iframe from '../../layouts/iframe'
 import {newFormatUrl} from "../../utils/index";
 
 /**
@@ -37,6 +38,11 @@ export function getAsyncRoutes(routes,label) {
         if (item.component) {
             if (item.component === 'basic') {
                 newItem.component = Basic
+            }else if(item.component === 'iframe'){
+                newItem.component = Iframe
+                if(item.meta.iframe!=undefined){
+                    item.meta.iframe = newFormatUrl(item.meta.iframe)
+                }
             }else{
                 newItem.component = () => import('~/pages/' + item.component + '.vue').then(m => m.default || m)
             }
@@ -46,9 +52,9 @@ export function getAsyncRoutes(routes,label) {
                 newItem[key] = item[key]
             }
         }
-        if(newItem['label'] != label){
-            newItem['path'] = newFormatUrl(item['path'])
-        }
+        // if(newItem['label'] != label){
+        //     newItem['path'] = newFormatUrl(item['path'])
+        // }
         if (newItem.children && newItem.children.length) {
             newItem.children = getAsyncRoutes(item.children,label)
         }

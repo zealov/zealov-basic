@@ -18577,3 +18577,9 @@ section.bg-white {
 .mobile .fixed-header[data-v-bd14ab50] {
   width: 100%;
 }
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+}
+

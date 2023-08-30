@@ -3,6 +3,39 @@
 return [
     [
         "label"     => "blog",
+        "path"      => "/admin/home",
+        "component" => "basic",
+        "name"      => "home",
+        "hidden"    => false,
+        "redirect"  => "",
+        "meta"      => [
+            "title" => "首页",
+            "icon"  => "el-icon-house",
+            "roles" => [
+                1
+            ],
+        ],
+        "children"  => [
+            [
+                "label"     => "blog",
+                "path"      => "/admin/home",
+                "component" => "home",
+                "name"      => "admin.home",
+                "hidden"    => false,
+                "redirect"  => "",
+                "meta"      => [
+                    "title" => "首页",
+                    "icon"  => "el-icon-house",
+                    "roles" => [
+                        1
+                    ],
+                ],
+
+            ],
+        ],
+    ],
+    [
+        "label"     => "blog",
         "path"      => "/admin/blog/navigation",
         "component" => "basic",
         "name"      => "blog.navigation.index",
@@ -80,6 +113,7 @@ return [
             ]
         ],
     ],
+
     [
         "label"     => "blog",
         "path"      => "/admin/blog/file",
@@ -177,7 +211,7 @@ return [
     ],
     [
         "label"     => "blog",
-        "path"      => "/admin/blog",
+        "path"      => "/admin/page",
         "component" => "basic",
         "name"      => "blog.post",
         "hidden"    => false,
